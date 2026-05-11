@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f5f4ef;
+  --foreground: #141414;
+  --muted: #716f68;
+  --panel: #fffdf8;
+  --panel-strong: #101010;
+  --line: rgba(20, 20, 20, 0.12);
+  --accent: #116b5f;
+  --accent-strong: #0b4c44;
+  --danger: #9f2f2f;
+  --warning: #9b6a10;
+  --success: #0d7655;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--background);
+}
+
+body {
+  height: 100dvh;
+  min-height: 100dvh;
+  margin: 0;
+  overflow: hidden;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(17, 107, 95, 0.14), transparent 32rem),
+    radial-gradient(circle at 88% 8%, rgba(178, 70, 51, 0.11), transparent 28rem),
+    linear-gradient(135deg, #f8f6ef 0%, #e8e5dc 100%);
+  color: var(--foreground);
+  font-family:
+    Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", ui-sans-serif,
+    system-ui, sans-serif;
+}
+
+button {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(17, 107, 95, 0.18);
+}
+
+.noise-layer {
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}
