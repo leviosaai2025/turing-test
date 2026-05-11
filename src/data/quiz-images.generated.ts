@@ -12,350 +12,350 @@ export type QuizImage = {
 export const quizImages: QuizImage[] = [
   {
     "id": "ai-1-MDEtZWxldmF0b3It",
-    "src": "/ai/01-elevator-ootd%20(1).png",
+    "src": "/ai/01-elevator-ootd%20(1).webp",
     "answer": "ai",
-    "fileName": "01-elevator-ootd (1).png"
+    "fileName": "01-elevator-ootd (1).webp"
   },
   {
     "id": "ai-2-MDItYmVkcm9vbS1t",
-    "src": "/ai/02-bedroom-mirror.png",
+    "src": "/ai/02-bedroom-mirror.webp",
     "answer": "ai",
-    "fileName": "02-bedroom-mirror.png"
+    "fileName": "02-bedroom-mirror.webp"
   },
   {
     "id": "ai-3-MDQtbGlmZXN0eWxl",
-    "src": "/ai/04-lifestyle-seoul-street.png",
+    "src": "/ai/04-lifestyle-seoul-street.webp",
     "answer": "ai",
-    "fileName": "04-lifestyle-seoul-street.png"
+    "fileName": "04-lifestyle-seoul-street.webp"
   },
   {
     "id": "ai-4-MDUtY2FyLWNsb3Nl",
-    "src": "/ai/05-car-closeup.jpeg",
+    "src": "/ai/05-car-closeup.webp",
     "answer": "ai",
-    "fileName": "05-car-closeup.jpeg"
+    "fileName": "05-car-closeup.webp"
   },
   {
     "id": "ai-5-MDUtc3Vid2F5LWNh",
-    "src": "/ai/05-subway-candid.png",
+    "src": "/ai/05-subway-candid.webp",
     "answer": "ai",
-    "fileName": "05-subway-candid.png"
+    "fileName": "05-subway-candid.webp"
   },
   {
     "id": "ai-6-Q2hhdEdQVCBJbWFn",
-    "src": "/ai/ChatGPT%20Image%207%20%D0%BC%D0%B0%D1%8F%202026%20%D0%B3.%2C%2015_04_31%C2%A0%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F%20(1).png",
+    "src": "/ai/ChatGPT%20Image%207%20%D0%BC%D0%B0%D1%8F%202026%20%D0%B3.%2C%2015_04_31%C2%A0%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F%20(1).webp",
     "answer": "ai",
-    "fileName": "ChatGPT Image 7 мая 2026 г., 15_04_31 — копия (1).png"
+    "fileName": "ChatGPT Image 7 мая 2026 г., 15_04_31 — копия (1).webp"
   },
   {
     "id": "ai-7-ZmluYWwtMDEgKDQp",
-    "src": "/ai/final-01%20(4).png",
+    "src": "/ai/final-01%20(4).webp",
     "answer": "ai",
-    "fileName": "final-01 (4).png"
+    "fileName": "final-01 (4).webp"
   },
   {
     "id": "ai-8-ZmluYWwtMDEgKDYp",
-    "src": "/ai/final-01%20(6).png",
+    "src": "/ai/final-01%20(6).webp",
     "answer": "ai",
-    "fileName": "final-01 (6).png"
+    "fileName": "final-01 (6).webp"
   },
   {
     "id": "ai-9-ZmluYWwtMDEgKDcp",
-    "src": "/ai/final-01%20(7).png",
+    "src": "/ai/final-01%20(7).webp",
     "answer": "ai",
-    "fileName": "final-01 (7).png"
+    "fileName": "final-01 (7).webp"
   },
   {
     "id": "ai-10-ZmluYWwtMDEgKDgp",
-    "src": "/ai/final-01%20(8).png",
+    "src": "/ai/final-01%20(8).webp",
     "answer": "ai",
-    "fileName": "final-01 (8).png"
+    "fileName": "final-01 (8).webp"
   },
   {
     "id": "ai-11-ZmluYWwtMDIgKDEw",
-    "src": "/ai/final-02%20(10).png",
+    "src": "/ai/final-02%20(10).webp",
     "answer": "ai",
-    "fileName": "final-02 (10).png"
+    "fileName": "final-02 (10).webp"
   },
   {
     "id": "ai-12-ZmluYWwtMDIgKDEx",
-    "src": "/ai/final-02%20(11).png",
+    "src": "/ai/final-02%20(11).webp",
     "answer": "ai",
-    "fileName": "final-02 (11).png"
+    "fileName": "final-02 (11).webp"
   },
   {
     "id": "ai-13-ZmluYWwtMDMgKDYp",
-    "src": "/ai/final-03%20(6).png",
+    "src": "/ai/final-03%20(6).webp",
     "answer": "ai",
-    "fileName": "final-03 (6).png"
+    "fileName": "final-03 (6).webp"
   },
   {
     "id": "ai-14-ZmluYWwtMDUgKDEx",
-    "src": "/ai/final-05%20(11).png",
+    "src": "/ai/final-05%20(11).webp",
     "answer": "ai",
-    "fileName": "final-05 (11).png"
+    "fileName": "final-05 (11).webp"
   },
   {
     "id": "ai-15-ZmluYWwtMDUgKDEy",
-    "src": "/ai/final-05%20(12).png",
+    "src": "/ai/final-05%20(12).webp",
     "answer": "ai",
-    "fileName": "final-05 (12).png"
+    "fileName": "final-05 (12).webp"
   },
   {
     "id": "ai-16-ZmluYWwtMDYtZmxv",
-    "src": "/ai/final-06-floor-brow.jpg",
+    "src": "/ai/final-06-floor-brow.webp",
     "answer": "ai",
-    "fileName": "final-06-floor-brow.jpg"
+    "fileName": "final-06-floor-brow.webp"
   },
   {
     "id": "ai-17-aGZfMjAyNjA1MDdf",
-    "src": "/ai/hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.png",
+    "src": "/ai/hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.webp",
     "answer": "ai",
-    "fileName": "hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.png"
+    "fileName": "hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.webp"
   },
   {
     "id": "ai-18-c2hvdC0wMV9ncHQt",
-    "src": "/ai/shot-01_gpt-image.png",
+    "src": "/ai/shot-01_gpt-image.webp",
     "answer": "ai",
-    "fileName": "shot-01_gpt-image.png"
+    "fileName": "shot-01_gpt-image.webp"
   },
   {
     "id": "ai-19-c2hvdC0wMWIgKDEp",
-    "src": "/ai/shot-01b%20(1).jpg",
+    "src": "/ai/shot-01b%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-01b (1).jpg"
+    "fileName": "shot-01b (1).webp"
   },
   {
     "id": "ai-20-c2hvdC0wMWIgKDIp",
-    "src": "/ai/shot-01b%20(2).png",
+    "src": "/ai/shot-01b%20(2).webp",
     "answer": "ai",
-    "fileName": "shot-01b (2).png"
+    "fileName": "shot-01b (2).webp"
   },
   {
     "id": "ai-21-c2hvdC0wMWJfbmFu",
-    "src": "/ai/shot-01b_nano-pro%20(1).png",
+    "src": "/ai/shot-01b_nano-pro%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-01b_nano-pro (1).png"
+    "fileName": "shot-01b_nano-pro (1).webp"
   },
   {
     "id": "ai-22-c2hvdC0wMiAoMiku",
-    "src": "/ai/shot-02%20(2).png",
+    "src": "/ai/shot-02%20(2).webp",
     "answer": "ai",
-    "fileName": "shot-02 (2).png"
+    "fileName": "shot-02 (2).webp"
   },
   {
     "id": "ai-23-c2hvdC0wMmFfbmFu",
-    "src": "/ai/shot-02a_nano-pro%20(1).png",
+    "src": "/ai/shot-02a_nano-pro%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-02a_nano-pro (1).png"
+    "fileName": "shot-02a_nano-pro (1).webp"
   },
   {
     "id": "ai-24-c2hvdC0wMmIgKDEp",
-    "src": "/ai/shot-02b%20(1).png",
+    "src": "/ai/shot-02b%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-02b (1).png"
+    "fileName": "shot-02b (1).webp"
   },
   {
     "id": "ai-25-c2hvdC0wMmIgKDIp",
-    "src": "/ai/shot-02b%20(2).png",
+    "src": "/ai/shot-02b%20(2).webp",
     "answer": "ai",
-    "fileName": "shot-02b (2).png"
+    "fileName": "shot-02b (2).webp"
   },
   {
     "id": "ai-26-c2hvdC0wMmJfbmFu",
-    "src": "/ai/shot-02b_nano-pro.png",
+    "src": "/ai/shot-02b_nano-pro.webp",
     "answer": "ai",
-    "fileName": "shot-02b_nano-pro.png"
+    "fileName": "shot-02b_nano-pro.webp"
   },
   {
     "id": "ai-27-c2hvdC0wMmJfbmFu",
-    "src": "/ai/shot-02b_nano.jpg",
+    "src": "/ai/shot-02b_nano.webp",
     "answer": "ai",
-    "fileName": "shot-02b_nano.jpg"
+    "fileName": "shot-02b_nano.webp"
   },
   {
     "id": "ai-28-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(3).png",
+    "src": "/ai/shot-03a_nano-pro%20(3).webp",
     "answer": "ai",
-    "fileName": "shot-03a_nano-pro (3).png"
+    "fileName": "shot-03a_nano-pro (3).webp"
   },
   {
     "id": "ai-29-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(4).png",
+    "src": "/ai/shot-03a_nano-pro%20(4).webp",
     "answer": "ai",
-    "fileName": "shot-03a_nano-pro (4).png"
+    "fileName": "shot-03a_nano-pro (4).webp"
   },
   {
     "id": "ai-30-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(5).png",
+    "src": "/ai/shot-03a_nano-pro%20(5).webp",
     "answer": "ai",
-    "fileName": "shot-03a_nano-pro (5).png"
+    "fileName": "shot-03a_nano-pro (5).webp"
   },
   {
     "id": "ai-31-c2hvdC0wM2IgKDQp",
-    "src": "/ai/shot-03b%20(4).png",
+    "src": "/ai/shot-03b%20(4).webp",
     "answer": "ai",
-    "fileName": "shot-03b (4).png"
+    "fileName": "shot-03b (4).webp"
   },
   {
     "id": "ai-32-c2hvdC0wNF9ncHQt",
-    "src": "/ai/shot-04_gpt-image.png",
+    "src": "/ai/shot-04_gpt-image.webp",
     "answer": "ai",
-    "fileName": "shot-04_gpt-image.png"
+    "fileName": "shot-04_gpt-image.webp"
   },
   {
     "id": "ai-33-c2hvdC0wNGIgKDEp",
-    "src": "/ai/shot-04b%20(1).jpg",
+    "src": "/ai/shot-04b%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-04b (1).jpg"
+    "fileName": "shot-04b (1).webp"
   },
   {
     "id": "ai-34-c2hvdC0wNSAoNCku",
-    "src": "/ai/shot-05%20(4).png",
+    "src": "/ai/shot-05%20(4).webp",
     "answer": "ai",
-    "fileName": "shot-05 (4).png"
+    "fileName": "shot-05 (4).webp"
   },
   {
     "id": "ai-35-c2hvdC0wNSAoNSku",
-    "src": "/ai/shot-05%20(5).png",
+    "src": "/ai/shot-05%20(5).webp",
     "answer": "ai",
-    "fileName": "shot-05 (5).png"
+    "fileName": "shot-05 (5).webp"
   },
   {
     "id": "ai-36-c2hvdC0wNWFfbmFu",
-    "src": "/ai/shot-05a_nano-pro%20(3).png",
+    "src": "/ai/shot-05a_nano-pro%20(3).webp",
     "answer": "ai",
-    "fileName": "shot-05a_nano-pro (3).png"
+    "fileName": "shot-05a_nano-pro (3).webp"
   },
   {
     "id": "ai-37-c2hvdC0wNWFfbmFu",
-    "src": "/ai/shot-05a_nano-pro%20(4).png",
+    "src": "/ai/shot-05a_nano-pro%20(4).webp",
     "answer": "ai",
-    "fileName": "shot-05a_nano-pro (4).png"
+    "fileName": "shot-05a_nano-pro (4).webp"
   },
   {
     "id": "ai-38-c2hvdC0wNWJfbmFu",
-    "src": "/ai/shot-05b_nano-pro%20(1).jpg",
+    "src": "/ai/shot-05b_nano-pro%20(1)-2.webp",
     "answer": "ai",
-    "fileName": "shot-05b_nano-pro (1).jpg"
+    "fileName": "shot-05b_nano-pro (1)-2.webp"
   },
   {
     "id": "ai-39-c2hvdC0wNWJfbmFu",
-    "src": "/ai/shot-05b_nano-pro%20(1).png",
+    "src": "/ai/shot-05b_nano-pro%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-05b_nano-pro (1).png"
+    "fileName": "shot-05b_nano-pro (1).webp"
   },
   {
-    "id": "ai-40-c2hvdC0wNWIucG5n",
-    "src": "/ai/shot-05b.png",
+    "id": "ai-40-c2hvdC0wNWIud2Vi",
+    "src": "/ai/shot-05b.webp",
     "answer": "ai",
-    "fileName": "shot-05b.png"
+    "fileName": "shot-05b.webp"
   },
   {
     "id": "ai-41-c2hvdC0wNyAoMyku",
-    "src": "/ai/shot-07%20(3).png",
+    "src": "/ai/shot-07%20(3).webp",
     "answer": "ai",
-    "fileName": "shot-07 (3).png"
+    "fileName": "shot-07 (3).webp"
   },
   {
     "id": "ai-42-c2hvdC0wOCAoMyku",
-    "src": "/ai/shot-08%20(3).png",
+    "src": "/ai/shot-08%20(3).webp",
     "answer": "ai",
-    "fileName": "shot-08 (3).png"
+    "fileName": "shot-08 (3).webp"
   },
   {
     "id": "ai-43-c2hvdC0wOF9uYW5v",
-    "src": "/ai/shot-08_nano-pro.png",
+    "src": "/ai/shot-08_nano-pro.webp",
     "answer": "ai",
-    "fileName": "shot-08_nano-pro.png"
+    "fileName": "shot-08_nano-pro.webp"
   },
   {
     "id": "ai-44-c2hvdC0wOSAoMiku",
-    "src": "/ai/shot-09%20(2).png",
+    "src": "/ai/shot-09%20(2).webp",
     "answer": "ai",
-    "fileName": "shot-09 (2).png"
+    "fileName": "shot-09 (2).webp"
   },
   {
     "id": "ai-45-c2hvdC0xMV9uYW5v",
-    "src": "/ai/shot-11_nano-pro_nano-pro%20(1).png",
+    "src": "/ai/shot-11_nano-pro_nano-pro%20(1).webp",
     "answer": "ai",
-    "fileName": "shot-11_nano-pro_nano-pro (1).png"
+    "fileName": "shot-11_nano-pro_nano-pro (1).webp"
   },
   {
     "id": "ai-46-c2hvdC0xM19uYW5v",
-    "src": "/ai/shot-13_nano-pro_nano-pro.png",
+    "src": "/ai/shot-13_nano-pro_nano-pro.webp",
     "answer": "ai",
-    "fileName": "shot-13_nano-pro_nano-pro.png"
+    "fileName": "shot-13_nano-pro_nano-pro.webp"
   },
   {
     "id": "human-1-MDY3YzQ1OTEtZWI4",
-    "src": "/human/067c4591-eb84-4269-b640-98eb99d40dc5.jpeg",
+    "src": "/human/067c4591-eb84-4269-b640-98eb99d40dc5.webp",
     "answer": "human",
-    "fileName": "067c4591-eb84-4269-b640-98eb99d40dc5.jpeg"
+    "fileName": "067c4591-eb84-4269-b640-98eb99d40dc5.webp"
   },
   {
     "id": "human-2-MzAyOWQwNWEtMjU4",
-    "src": "/human/3029d05a-258f-49f3-bee0-d328b2bda808.jpeg",
+    "src": "/human/3029d05a-258f-49f3-bee0-d328b2bda808.webp",
     "answer": "human",
-    "fileName": "3029d05a-258f-49f3-bee0-d328b2bda808.jpeg"
+    "fileName": "3029d05a-258f-49f3-bee0-d328b2bda808.webp"
   },
   {
     "id": "human-3-M2I0OTZlMDktYzY5",
-    "src": "/human/3b496e09-c698-46ff-b6a5-31ebc40084aa.jpeg",
+    "src": "/human/3b496e09-c698-46ff-b6a5-31ebc40084aa.webp",
     "answer": "human",
-    "fileName": "3b496e09-c698-46ff-b6a5-31ebc40084aa.jpeg"
+    "fileName": "3b496e09-c698-46ff-b6a5-31ebc40084aa.webp"
   },
   {
     "id": "human-4-NTUzNmU0ZmEtN2Ez",
-    "src": "/human/5536e4fa-7a33-4ee5-98e8-4df6a763135c.jpeg",
+    "src": "/human/5536e4fa-7a33-4ee5-98e8-4df6a763135c.webp",
     "answer": "human",
-    "fileName": "5536e4fa-7a33-4ee5-98e8-4df6a763135c.jpeg"
+    "fileName": "5536e4fa-7a33-4ee5-98e8-4df6a763135c.webp"
   },
   {
     "id": "human-5-NzQ5Zjc1YzNlYjg5",
-    "src": "/human/749f75c3eb89d388f77f207255b2e6e1.jpg",
+    "src": "/human/749f75c3eb89d388f77f207255b2e6e1.webp",
     "answer": "human",
-    "fileName": "749f75c3eb89d388f77f207255b2e6e1.jpg"
+    "fileName": "749f75c3eb89d388f77f207255b2e6e1.webp"
   },
   {
     "id": "human-6-OTNkNDg0NDgtYWFl",
-    "src": "/human/93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.jpeg",
+    "src": "/human/93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.webp",
     "answer": "human",
-    "fileName": "93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.jpeg"
+    "fileName": "93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.webp"
   },
   {
     "id": "human-7-YjQ5NmI0NzQtNmIy",
-    "src": "/human/b496b474-6b27-480d-8049-8e272a486a6a.jpeg",
+    "src": "/human/b496b474-6b27-480d-8049-8e272a486a6a.webp",
     "answer": "human",
-    "fileName": "b496b474-6b27-480d-8049-8e272a486a6a.jpeg"
+    "fileName": "b496b474-6b27-480d-8049-8e272a486a6a.webp"
   },
   {
     "id": "human-8-YmJhZjRjYTMtOWE2",
-    "src": "/human/bbaf4ca3-9a64-4281-8075-7b96231599ea.jpeg",
+    "src": "/human/bbaf4ca3-9a64-4281-8075-7b96231599ea.webp",
     "answer": "human",
-    "fileName": "bbaf4ca3-9a64-4281-8075-7b96231599ea.jpeg"
+    "fileName": "bbaf4ca3-9a64-4281-8075-7b96231599ea.webp"
   },
   {
     "id": "human-9-YmNkNTM4MGMtNjNl",
-    "src": "/human/bcd5380c-63e3-419e-b99b-b4caae5488d6.jpeg",
+    "src": "/human/bcd5380c-63e3-419e-b99b-b4caae5488d6.webp",
     "answer": "human",
-    "fileName": "bcd5380c-63e3-419e-b99b-b4caae5488d6.jpeg"
+    "fileName": "bcd5380c-63e3-419e-b99b-b4caae5488d6.webp"
   },
   {
     "id": "human-10-YzIwY2M2NDYtZjZj",
-    "src": "/human/c20cc646-f6cc-4a65-bb49-f01a92ed777e.jpeg",
+    "src": "/human/c20cc646-f6cc-4a65-bb49-f01a92ed777e.webp",
     "answer": "human",
-    "fileName": "c20cc646-f6cc-4a65-bb49-f01a92ed777e.jpeg"
+    "fileName": "c20cc646-f6cc-4a65-bb49-f01a92ed777e.webp"
   },
   {
     "id": "human-11-ZWViYzg3OTMtZGVl",
-    "src": "/human/eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.jpeg",
+    "src": "/human/eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.webp",
     "answer": "human",
-    "fileName": "eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.jpeg"
+    "fileName": "eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.webp"
   },
   {
     "id": "human-12-ZmY4ZDljZDgtNDAx",
-    "src": "/human/ff8d9cd8-4014-4729-9663-c31d2ac2733a.jpeg",
+    "src": "/human/ff8d9cd8-4014-4729-9663-c31d2ac2733a.webp",
     "answer": "human",
-    "fileName": "ff8d9cd8-4014-4729-9663-c31d2ac2733a.jpeg"
+    "fileName": "ff8d9cd8-4014-4729-9663-c31d2ac2733a.webp"
   }
 ] as QuizImage[];
