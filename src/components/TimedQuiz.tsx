@@ -22,6 +22,7 @@ const LEADERBOARD_KEY = "leviosa-turing-test-leaderboard-v1";
 const MAX_LEADERBOARD_ENTRIES = 12;
 
 type Phase = "booting" | "intro" | "question" | "feedback" | "finished";
+type PreloadStatus = "idle" | "loading" | "ready";
 
 type Stats = {
   correct: number;
@@ -62,6 +63,10 @@ function shuffleImages(images: QuizImage[]) {
   }
 
   return next;
+}
+
+function createRound() {
+  return shuffleImages(quizImages).slice(0, ROUND_SIZE);
 }
 
 function verdictForScore(correct: number, total: number) {
@@ -196,6 +201,9 @@ export function TimedQuiz() {
   ).length;
   const hasBothAnswerTypes = aiImageCount > 0 && humanImageCount > 0;
   const [phase, setPhase] = useState<Phase>("booting");
+  const [pendingRound, setPendingRound] = useState<QuizImage[]>([]);
+  const [preloadStatus, setPreloadStatus] = useState<PreloadStatus>("idle");
+  const [preloadedCount, setPreloadedCount] = useState(0);
   const [round, setRound] = useState<QuizImage[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [secondsLeft, setSecondsLeft] = useState(SECONDS_PER_IMAGE);
@@ -219,6 +227,53 @@ export function TimedQuiz() {
     ? ((currentIndex + (phase === "finished" ? 1 : 0)) / totalImages) * 100
     : 0;
   const timerPercent = (secondsLeft / SECONDS_PER_IMAGE) * 100;
+  const isRoundReady = preloadStatus === "ready" && pendingRound.length > 0;
+
+  const prepareNextRound = useCallback(() => {
+    if (!hasBothAnswerTypes) {
+      setPendingRound([]);
+      setPreloadStatus("idle");
+      setPreloadedCount(0);
+      return;
+    }
+
+    setPreloadStatus("loading");
+    setPreloadedCount(0);
+    setPendingRound(createRound());
+  }, [hasBothAnswerTypes]);
+
+  useEffect(() => {
+    if (pendingRound.length === 0) {
+      return;
+    }
+
+    let cancelled = false;
+
+    Promise.all(
+      pendingRound.map(
+        (image) =>
+          new Promise<void>((resolve) => {
+            const preloadImage = new window.Image();
+
+            preloadImage.onload = () => resolve();
+            preloadImage.onerror = () => resolve();
+            preloadImage.src = image.src;
+          }).then(() => {
+            if (!cancelled) {
+              setPreloadedCount((count) => count + 1);
+            }
+          }),
+      ),
+    ).then(() => {
+      if (!cancelled) {
+        setPreloadStatus("ready");
+      }
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [pendingRound]);
 
   const startRound = useCallback(() => {
     if (!hasBothAnswerTypes) {
@@ -234,7 +289,7 @@ export function TimedQuiz() {
       return;
     }
 
-    const nextRound = shuffleImages(quizImages).slice(0, ROUND_SIZE);
+    const nextRound = pendingRound.length > 0 ? pendingRound : createRound();
 
     setRound(nextRound);
     setCurrentIndex(0);
@@ -245,17 +300,24 @@ export function TimedQuiz() {
     setQuestionStartedAt(Date.now());
     setTotalTimeMs(0);
     savedResultIdRef.current = null;
+    setPendingRound([]);
+    setPreloadStatus("idle");
+    setPreloadedCount(0);
     setPhase(nextRound.length > 0 ? "question" : "finished");
-  }, [hasBothAnswerTypes]);
+  }, [hasBothAnswerTypes, pendingRound]);
 
   useEffect(() => {
     const bootId = window.setTimeout(() => {
       setLeaderboard(readLeaderboard());
       setPhase(hasBothAnswerTypes ? "intro" : "finished");
+
+      if (hasBothAnswerTypes) {
+        prepareNextRound();
+      }
     }, 0);
 
     return () => window.clearTimeout(bootId);
-  }, [hasBothAnswerTypes]);
+  }, [hasBothAnswerTypes, prepareNextRound]);
 
   const handleStartSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
@@ -263,14 +325,14 @@ export function TimedQuiz() {
 
       const nextName = nameInput.trim().slice(0, 24);
 
-      if (!nextName) {
+      if (!nextName || !isRoundReady) {
         return;
       }
 
       setPlayerName(nextName);
       startRound();
     },
-    [nameInput, startRound],
+    [nameInput, isRoundReady, startRound],
   );
 
   const returnToIntro = useCallback(() => {
@@ -285,8 +347,9 @@ export function TimedQuiz() {
     setPlayerName("");
     setNameInput("");
     savedResultIdRef.current = null;
+    prepareNextRound();
     setPhase("intro");
-  }, []);
+  }, [prepareNextRound]);
 
   const finishQuestion = useCallback(
     (choice: QuizAnswer | null, timedOut = false) => {
@@ -485,6 +548,9 @@ export function TimedQuiz() {
       <IntroScreen
         leaderboard={leaderboard}
         nameInput={nameInput}
+        preloadStatus={preloadStatus}
+        preloadedCount={preloadedCount}
+        totalPreloadCount={pendingRound.length}
         onNameChange={setNameInput}
         onSubmit={handleStartSubmit}
       />
@@ -641,15 +707,25 @@ export function TimedQuiz() {
 function IntroScreen({
   leaderboard,
   nameInput,
+  preloadStatus,
+  preloadedCount,
+  totalPreloadCount,
   onNameChange,
   onSubmit,
 }: {
   leaderboard: LeaderboardEntry[];
   nameInput: string;
+  preloadStatus: PreloadStatus;
+  preloadedCount: number;
+  totalPreloadCount: number;
   onNameChange: (value: string) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) {
-  const canStart = nameInput.trim().length > 0;
+  const isReady = preloadStatus === "ready" && totalPreloadCount > 0;
+  const canStart = nameInput.trim().length > 0 && isReady;
+  const preloadLabel = isReady
+    ? "이미지 준비 완료"
+    : `이미지 준비 중 ${preloadedCount}/${totalPreloadCount || ROUND_SIZE}`;
 
   return (
     <main className="relative h-[100dvh] max-h-[100dvh] overflow-hidden bg-black px-3 py-3 text-white">
@@ -669,7 +745,9 @@ function IntroScreen({
                 이름을 입력하세요
               </h1>
             </div>
-            <p className="pb-1 text-xs font-black text-white/36">10문제</p>
+            <p className="pb-1 text-xs font-black text-white/36">
+              {preloadLabel}
+            </p>
           </div>
           <div className="mt-4 flex gap-2">
             <input
@@ -685,7 +763,7 @@ function IntroScreen({
               disabled={!canStart}
               className="h-14 shrink-0 rounded-full bg-white px-5 text-base font-black text-black transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-35"
             >
-              시작
+              {isReady ? "시작" : "준비 중"}
             </button>
           </div>
         </form>
