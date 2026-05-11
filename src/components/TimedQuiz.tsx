@@ -724,47 +724,81 @@ function IntroScreen({
   const isReady = preloadStatus === "ready" && totalPreloadCount > 0;
   const canStart = nameInput.trim().length > 0 && isReady;
   const preloadLabel = isReady
-    ? "이미지 준비 완료"
-    : `이미지 준비 중 ${preloadedCount}/${totalPreloadCount || ROUND_SIZE}`;
+    ? "READY"
+    : `${preloadedCount}/${totalPreloadCount || ROUND_SIZE}`;
+  const preloadProgress = isReady
+    ? 100
+    : Math.round((preloadedCount / (totalPreloadCount || ROUND_SIZE)) * 100);
 
   return (
-    <main className="relative h-[100dvh] max-h-[100dvh] overflow-hidden bg-black px-3 py-3 text-white">
-      <div className="noise-layer pointer-events-none fixed inset-0 z-20 opacity-35" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(18,216,137,0.16),transparent_26rem),radial-gradient(circle_at_82%_22%,rgba(255,77,109,0.14),transparent_24rem),linear-gradient(135deg,#111,#050505)]" />
+    <main className="relative h-[100dvh] max-h-[100dvh] overflow-hidden bg-[#030504] px-3 py-3 text-white">
+      <div className="noise-layer pointer-events-none fixed inset-0 z-20 opacity-45" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_8%_12%,rgba(18,216,137,0.28),transparent_17rem),radial-gradient(circle_at_93%_8%,rgba(154,255,36,0.14),transparent_14rem),radial-gradient(circle_at_86%_42%,rgba(255,77,109,0.11),transparent_18rem),linear-gradient(155deg,#101312_0%,#060807_46%,#020202_100%)]" />
+      <div className="pointer-events-none absolute inset-x-8 top-0 h-36 rounded-full bg-[#12d889]/15 blur-3xl" />
       <section className="relative z-10 mx-auto grid h-full w-full max-w-md grid-rows-[auto_minmax(0,1fr)] gap-3">
         <form
           onSubmit={onSubmit}
-          className="w-full rounded-[1.75rem] border border-white/10 bg-[#171717]/92 p-4 shadow-[0_30px_90px_-54px_rgba(0,0,0,0.95)]"
+          className="relative overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.075] p-1 shadow-[0_28px_80px_-42px_rgba(18,216,137,0.7)] backdrop-blur-2xl"
         >
-          <div className="flex items-end justify-between gap-4">
-            <div>
-              <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-white/42">
-                Leviosa Turing Test
-              </p>
-              <h1 className="mt-2 text-3xl font-black leading-none tracking-normal">
-                이름을 입력하세요
-              </h1>
+          <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-white/50 to-transparent" />
+          <div className="rounded-[calc(2rem-0.25rem)] border border-white/[0.06] bg-[#0b0d0c]/88 px-4 py-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+            <div className="flex items-start justify-between gap-3">
+              <div className="min-w-0">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#12d889]/22 bg-[#12d889]/10 px-3 py-1 text-[0.62rem] font-black uppercase tracking-[0.22em] text-[#91ffd8]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#9aff24] shadow-[0_0_14px_rgba(154,255,36,0.85)]" />
+                  Leviosa Turing Test
+                </div>
+                <h1 className="mt-3 text-[2.1rem] font-black leading-[0.96] tracking-[-0.045em] text-white sm:text-4xl">
+                  이름을 입력하고
+                  <span className="block bg-gradient-to-r from-white via-[#d8fff2] to-[#8affca] bg-clip-text text-transparent">
+                    감별을 시작하세요
+                  </span>
+                </h1>
+              </div>
+              <div className="shrink-0 rounded-[1.15rem] border border-white/10 bg-white/[0.06] px-3 py-2 text-right">
+                <p className="text-[0.58rem] font-black uppercase tracking-[0.18em] text-white/38">
+                  Round
+                </p>
+                <p className="mt-0.5 text-lg font-black leading-none text-white">
+                  {ROUND_SIZE}
+                </p>
+              </div>
             </div>
-            <p className="pb-1 text-xs font-black text-white/36">
-              {preloadLabel}
-            </p>
-          </div>
-          <div className="mt-4 flex gap-2">
-            <input
-              autoFocus
-              maxLength={24}
-              value={nameInput}
-              onChange={(event) => onNameChange(event.target.value)}
-              placeholder="이름"
-              className="h-14 min-w-0 flex-1 rounded-full border border-white/12 bg-black/54 px-5 text-xl font-black text-white outline-none ring-1 ring-white/10 transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] placeholder:text-white/28 focus:border-white/42 focus:ring-white/28"
-            />
-            <button
-              type="submit"
-              disabled={!canStart}
-              className="h-14 shrink-0 rounded-full bg-white px-5 text-base font-black text-black transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:pointer-events-none disabled:opacity-35"
-            >
-              {isReady ? "시작" : "준비 중"}
-            </button>
+
+            <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] gap-2 rounded-[1.35rem] border border-white/10 bg-black/45 p-1.5 shadow-[inset_0_1px_18px_rgba(0,0,0,0.35)]">
+              <label className="sr-only" htmlFor="player-name">
+                이름
+              </label>
+              <input
+                id="player-name"
+                autoFocus
+                maxLength={24}
+                value={nameInput}
+                onChange={(event) => onNameChange(event.target.value)}
+                placeholder="이름"
+                className="h-14 min-w-0 rounded-[1.05rem] bg-transparent px-4 text-xl font-black text-white outline-none transition duration-300 placeholder:text-white/24 focus:bg-white/[0.035]"
+              />
+              <button
+                type="submit"
+                disabled={!canStart}
+                className="group relative h-14 shrink-0 overflow-hidden rounded-[1.05rem] bg-white px-5 text-base font-black text-black shadow-[0_14px_32px_-18px_rgba(255,255,255,0.85)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:pointer-events-none disabled:bg-white/28 disabled:text-white/38 disabled:shadow-none"
+              >
+                <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-[#9aff24]/65 to-transparent transition duration-700 group-hover:translate-x-[120%]" />
+                <span className="relative">{isReady ? "시작" : "준비"}</span>
+              </button>
+            </div>
+
+            <div className="mt-3 flex items-center gap-3 text-[0.68rem] font-black text-white/45">
+              <div className="h-1.5 min-w-0 flex-1 overflow-hidden rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-gradient-to-r from-[#12d889] to-[#9aff24] transition-all duration-500"
+                  style={{ width: `${Math.min(100, preloadProgress)}%` }}
+                />
+              </div>
+              <span className="shrink-0 tracking-[0.12em] text-white/55">
+                {preloadLabel}
+              </span>
+            </div>
           </div>
         </form>
 
@@ -776,79 +810,141 @@ function IntroScreen({
 
 function LeaderboardList({ entries }: { entries: LeaderboardEntry[] }) {
   const topEntries = entries.slice(0, 5);
+  const perfectCount = entries.filter((entry) => entry.accuracy === 100).length;
+  const bestScore = topEntries[0]?.accuracy ?? 0;
+  const fastestPerfect = entries.find((entry) => entry.accuracy === 100);
 
   return (
-    <div className="flex min-h-0 w-full flex-col rounded-[1.75rem] border border-white/10 bg-[#141414]/96 p-4 shadow-[0_30px_90px_-54px_rgba(0,0,0,0.95)]">
-      <div className="flex items-end justify-between gap-4">
-        <div>
-          <p className="text-[0.68rem] font-black uppercase tracking-[0.2em] text-white/38">
-            Leaderboard
-          </p>
-          <h2 className="mt-1 text-2xl font-black leading-none tracking-normal text-white">
-            TOP 참가자
-          </h2>
+    <div className="relative flex min-h-0 w-full flex-col overflow-hidden rounded-[2rem] border border-white/12 bg-white/[0.07] p-1 shadow-[0_30px_90px_-52px_rgba(0,0,0,0.95)] backdrop-blur-2xl">
+      <div className="absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-[#9aff24]/70 to-transparent" />
+      <div className="flex min-h-0 flex-1 flex-col rounded-[calc(2rem-0.25rem)] border border-white/[0.06] bg-[#090b0a]/88 p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.08)]">
+        <div className="flex items-start justify-between gap-4">
+          <div>
+            <p className="text-[0.68rem] font-black uppercase tracking-[0.22em] text-[#91ffd8]/70">
+              Leaderboard
+            </p>
+            <h2 className="mt-1 text-[1.72rem] font-black leading-none tracking-[-0.035em] text-white">
+              TOP 참가자
+            </h2>
+          </div>
+          <div className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-right text-[0.62rem] font-black leading-none text-white/42">
+            정답순 · 시간순
+          </div>
         </div>
-        <p className="pb-0.5 text-xs font-black text-white/36">정답순 · 100점 시간순</p>
-      </div>
 
-      <div className="mt-4 grid grid-cols-3 rounded-full bg-white/[0.07] p-1 ring-1 ring-white/[0.08]">
-        <div className="rounded-full bg-white px-3 py-2.5 text-center text-sm font-black leading-none text-black">
-          전체
+        <div className="mt-4 grid grid-cols-3 gap-2">
+          <LeaderboardStatPill label="기록" value={`${entries.length}`} />
+          <LeaderboardStatPill label="최고점" value={`${bestScore}`} tone="bright" />
+          <LeaderboardStatPill
+            label="100점"
+            value={perfectCount ? `${perfectCount}` : "—"}
+          />
         </div>
-        <div className="px-3 py-2.5 text-center text-sm font-black leading-none text-white/42">
-          100점
-        </div>
-        <div className="px-3 py-2.5 text-center text-sm font-black leading-none text-white/42">
-          시간
-        </div>
-      </div>
 
-      {topEntries.length > 0 ? (
-        <div className="mt-4 min-h-0 flex-1 space-y-3 overflow-hidden">
-          {topEntries.map((entry, index) => (
-            <div
-              key={entry.id}
-              className="grid min-h-[5.25rem] grid-cols-[1.7rem_3.4rem_minmax(0,1fr)_3.25rem] items-center gap-3 rounded-[1.45rem] bg-white/[0.055] px-3.5 py-3 ring-1 ring-white/[0.07]"
-            >
-              <div className="text-center text-lg font-black leading-none text-white/78">
-                {index + 1}
-              </div>
-              <div
-                className="grid h-14 w-14 place-items-center rounded-full text-lg font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]"
-                style={avatarBackgroundForName(entry.name)}
-              >
-                {initialsForName(entry.name)}
-              </div>
-              <div className="min-w-0">
-                <p className="truncate text-xl font-black leading-none text-white">
-                  {entry.name}
-                </p>
-                <p className="mt-1.5 truncate text-sm font-bold leading-none text-white/42">
-                  {entry.correct}/{entry.total} 정답 ·{" "}
-                  {formatSeconds(entry.totalTimeMs)}
-                </p>
-              </div>
-              <div className="flex min-w-0 flex-col items-end">
-                <p className="text-2xl font-black leading-none text-white">
-                  {entry.accuracy}
-                </p>
-                <p className="mt-0.5 text-[0.65rem] font-black leading-none text-white/38">
-                  점
-                </p>
-                {entry.accuracy === 100 && (
-                  <div className="mt-1 rounded-full bg-[#9aff24] px-2 py-0.5 text-[0.58rem] font-black text-black">
-                    FAST
+        {topEntries.length > 0 ? (
+          <div className="mt-4 min-h-0 flex-1 space-y-2.5 overflow-hidden">
+            {topEntries.map((entry, index) => {
+              const isChampion = index === 0;
+              const scoreWidth = Math.max(8, entry.accuracy);
+
+              return (
+                <div
+                  key={entry.id}
+                  className={`relative grid min-h-[5.25rem] grid-cols-[1.55rem_3.25rem_minmax(0,1fr)_3rem] items-center gap-3 overflow-hidden rounded-[1.45rem] px-3.5 py-3 ring-1 transition duration-300 ${
+                    isChampion
+                      ? "bg-gradient-to-r from-[#13251d] via-white/[0.075] to-[#191f13] ring-[#9aff24]/22 shadow-[0_18px_55px_-32px_rgba(154,255,36,0.9)]"
+                      : "bg-white/[0.052] ring-white/[0.07]"
+                  }`}
+                >
+                  <div className="absolute inset-x-0 bottom-0 h-1 bg-white/[0.045]">
+                    <div
+                      className="h-full bg-gradient-to-r from-[#12d889] to-[#9aff24] opacity-80"
+                      style={{ width: `${scoreWidth}%` }}
+                    />
                   </div>
-                )}
-              </div>
+                  <div
+                    className={`text-center text-lg font-black leading-none ${
+                      isChampion ? "text-[#9aff24]" : "text-white/68"
+                    }`}
+                  >
+                    {index + 1}
+                  </div>
+                  <div
+                    className="relative grid h-[3.25rem] w-[3.25rem] place-items-center rounded-[1.05rem] text-lg font-black text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.24),0_16px_34px_-22px_rgba(18,216,137,0.9)]"
+                    style={avatarBackgroundForName(entry.name)}
+                  >
+                    <span className="absolute inset-0 rounded-[1.05rem] bg-white/[0.08]" />
+                    <span className="relative">{initialsForName(entry.name)}</span>
+                  </div>
+                  <div className="min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="truncate text-xl font-black leading-none tracking-[-0.03em] text-white">
+                        {entry.name}
+                      </p>
+                      {isChampion && (
+                        <span className="rounded-full bg-[#9aff24] px-2 py-0.5 text-[0.55rem] font-black text-black">
+                          #1
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1.5 truncate text-sm font-bold leading-none text-white/45">
+                      {entry.correct}/{entry.total} 정답 ·{" "}
+                      {formatSeconds(entry.totalTimeMs)}
+                    </p>
+                  </div>
+                  <div className="flex min-w-0 flex-col items-end">
+                    <p className="text-2xl font-black leading-none tracking-[-0.04em] text-white">
+                      {entry.accuracy}
+                    </p>
+                    <p className="mt-0.5 text-[0.65rem] font-black leading-none text-white/38">
+                      점
+                    </p>
+                    {entry.id === fastestPerfect?.id && (
+                      <div className="mt-1 rounded-full bg-[#9aff24] px-2 py-0.5 text-[0.58rem] font-black text-black">
+                        FAST
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        ) : (
+          <div className="mt-4 grid min-h-0 flex-1 place-items-center rounded-[1.55rem] border border-dashed border-white/12 bg-white/[0.045] px-5 text-center">
+            <div>
+              <p className="text-2xl font-black text-white/72">첫 기록을 기다리는 중</p>
+              <p className="mt-2 text-sm font-bold text-white/38">
+                이름을 입력하고 라운드를 시작하면 여기에 순위가 표시됩니다.
+              </p>
             </div>
-          ))}
-        </div>
-      ) : (
-        <div className="mt-4 grid min-h-0 flex-1 place-items-center rounded-[1.55rem] bg-white/[0.055] px-4 text-center text-sm font-bold text-white/42 ring-1 ring-white/[0.075]">
-          아직 기록이 없습니다.
-        </div>
-      )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function LeaderboardStatPill({
+  label,
+  value,
+  tone = "muted",
+}: {
+  label: string;
+  value: string;
+  tone?: "muted" | "bright";
+}) {
+  return (
+    <div
+      className={`rounded-[1rem] border px-3 py-2.5 ${
+        tone === "bright"
+          ? "border-[#9aff24]/20 bg-[#9aff24]/10"
+          : "border-white/10 bg-white/[0.045]"
+      }`}
+    >
+      <p className="text-[0.6rem] font-black uppercase tracking-[0.16em] text-white/35">
+        {label}
+      </p>
+      <p className="mt-1 text-lg font-black leading-none text-white">{value}</p>
     </div>
   );
 }
