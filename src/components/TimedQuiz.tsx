@@ -1330,7 +1330,7 @@ function TrapMeter({
       <div className="flex items-center justify-between text-[0.62rem] font-black uppercase tracking-[0.18em] text-white/52">
         <span className="flex items-center gap-1.5">
           <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ff4d6d] shadow-[0_0_10px_rgba(255,77,109,0.85)]" />
-          함정 지수
+          오답률
         </span>
         <span className={`tabular-nums ${accent}`}>
           {wrongRate}%{" "}
