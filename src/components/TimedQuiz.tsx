@@ -180,6 +180,68 @@ function formatSeconds(milliseconds: number) {
   return `${(milliseconds / 1000).toFixed(1)}초`;
 }
 
+function escapeCsvCell(value: string | number) {
+  const stringValue = String(value ?? "");
+
+  if (/[",\n\r]/.test(stringValue)) {
+    return `"${stringValue.replace(/"/g, '""')}"`;
+  }
+
+  return stringValue;
+}
+
+function downloadLeaderboardCsv(entries: LeaderboardEntry[]) {
+  if (typeof window === "undefined" || entries.length === 0) {
+    return;
+  }
+
+  const header = [
+    "순위",
+    "이름",
+    "전화번호",
+    "인스타그램",
+    "정답",
+    "오답",
+    "시간초과",
+    "총문항",
+    "정답률(%)",
+    "소요시간(초)",
+    "기록시각",
+  ];
+
+  const rows = entries.map((entry, index) => [
+    index + 1,
+    entry.name,
+    entry.phone,
+    entry.instagram,
+    entry.correct,
+    entry.wrong,
+    entry.timedOut,
+    entry.total,
+    entry.accuracy,
+    (entry.totalTimeMs / 1000).toFixed(2),
+    entry.createdAt,
+  ]);
+
+  const csvBody = [header, ...rows]
+    .map((row) => row.map(escapeCsvCell).join(","))
+    .join("\r\n");
+
+  const blob = new Blob(["﻿" + csvBody], {
+    type: "text/csv;charset=utf-8;",
+  });
+  const url = URL.createObjectURL(blob);
+  const anchor = document.createElement("a");
+  const today = new Date().toISOString().slice(0, 10);
+
+  anchor.href = url;
+  anchor.download = `leviosa-turing-test-${today}.csv`;
+  document.body.appendChild(anchor);
+  anchor.click();
+  document.body.removeChild(anchor);
+  URL.revokeObjectURL(url);
+}
+
 function initialsForName(name: string) {
   const trimmed = name.trim();
 
@@ -707,6 +769,26 @@ export function TimedQuiz() {
                     <p className="mt-2 text-base font-black text-white/82">
                       {finalVerdict}
                     </p>
+                    {(playerPhone || playerInstagram) && (
+                      <dl className="mt-3 space-y-1 text-[0.7rem] font-bold text-white/55">
+                        {playerPhone && (
+                          <div className="flex items-center gap-2">
+                            <dt className="shrink-0 rounded-full bg-white/[0.06] px-2 py-0.5 text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/45">
+                              TEL
+                            </dt>
+                            <dd className="truncate text-white/78">{playerPhone}</dd>
+                          </div>
+                        )}
+                        {playerInstagram && (
+                          <div className="flex items-center gap-2">
+                            <dt className="shrink-0 rounded-full bg-white/[0.06] px-2 py-0.5 text-[0.58rem] font-black uppercase tracking-[0.16em] text-white/45">
+                              IG
+                            </dt>
+                            <dd className="truncate text-white/78">@{playerInstagram}</dd>
+                          </div>
+                        )}
+                      </dl>
+                    )}
                   </div>
                   <button
                     type="button"
@@ -896,8 +978,19 @@ function LeaderboardList({ entries }: { entries: LeaderboardEntry[] }) {
               TOP 참가자
             </h2>
           </div>
-          <div className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-2 text-right text-[0.62rem] font-black leading-none text-white/42">
-            정답순 · 시간순
+          <div className="flex shrink-0 flex-col items-end gap-1.5">
+            <button
+              type="button"
+              onClick={() => downloadLeaderboardCsv(entries)}
+              disabled={entries.length === 0}
+              className="group relative overflow-hidden rounded-full border border-[#9aff24]/28 bg-[#9aff24]/12 px-3 py-2 text-[0.62rem] font-black uppercase tracking-[0.18em] text-[#9aff24] shadow-[0_10px_24px_-18px_rgba(154,255,36,0.9)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] hover:bg-[#9aff24]/20 active:scale-[0.97] disabled:cursor-not-allowed disabled:border-white/8 disabled:bg-white/[0.04] disabled:text-white/30 disabled:shadow-none"
+            >
+              <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-white/30 to-transparent transition duration-700 group-hover:translate-x-[120%]" />
+              <span className="relative">엑셀 다운로드</span>
+            </button>
+            <div className="rounded-full border border-white/10 bg-white/[0.06] px-3 py-1.5 text-right text-[0.6rem] font-black leading-none text-white/42">
+              정답순 · 시간순
+            </div>
           </div>
         </div>
 
@@ -956,6 +1049,13 @@ function LeaderboardList({ entries }: { entries: LeaderboardEntry[] }) {
                         </span>
                       )}
                     </div>
+                    {(entry.instagram || entry.phone) && (
+                      <p className="mt-1 truncate text-[0.7rem] font-bold leading-none text-white/52">
+                        {entry.instagram && `@${entry.instagram}`}
+                        {entry.instagram && entry.phone && " · "}
+                        {entry.phone}
+                      </p>
+                    )}
                     <p className="mt-1.5 truncate text-sm font-bold leading-none text-white/45">
                       {entry.correct}/{entry.total} 정답 ·{" "}
                       {formatSeconds(entry.totalTimeMs)}
