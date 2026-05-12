@@ -21,6 +21,7 @@ const SECONDS_PER_IMAGE = 10;
 const FEEDBACK_MS = 900;
 const LEADERBOARD_KEY = "leviosa-turing-test-leaderboard-v1";
 const EXPOSURE_KEY = "leviosa-turing-test-image-exposure-v1";
+const IMAGE_STATS_KEY = "leviosa-turing-test-image-stats-v1";
 
 type Phase = "booting" | "intro" | "question" | "feedback" | "finished";
 type PreloadStatus = "idle" | "loading" | "ready";
@@ -30,6 +31,15 @@ type Stats = {
   wrong: number;
   timedOut: number;
 };
+
+type ImageStats = {
+  correct: number;
+  wrong: number;
+  timedOut: number;
+  total: number;
+};
+
+type ImageStatsMap = Record<string, ImageStats>;
 
 type Feedback = {
   choice: QuizAnswer | null;
@@ -108,6 +118,68 @@ function recordExposure(imageIds: string[]) {
   }
 
   window.localStorage.setItem(EXPOSURE_KEY, JSON.stringify(counts));
+}
+
+function readImageStats(): ImageStatsMap {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  try {
+    const raw = window.localStorage.getItem(IMAGE_STATS_KEY);
+    const parsed: unknown = raw ? JSON.parse(raw) : {};
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+
+    const result: ImageStatsMap = {};
+
+    for (const [key, value] of Object.entries(parsed)) {
+      if (
+        value &&
+        typeof value === "object" &&
+        !Array.isArray(value) &&
+        typeof (value as ImageStats).correct === "number" &&
+        typeof (value as ImageStats).wrong === "number" &&
+        typeof (value as ImageStats).timedOut === "number" &&
+        typeof (value as ImageStats).total === "number"
+      ) {
+        result[key] = value as ImageStats;
+      }
+    }
+
+    return result;
+  } catch {
+    return {};
+  }
+}
+
+function recordImageResult(
+  imageId: string,
+  isCorrect: boolean,
+  timedOut: boolean,
+): ImageStatsMap {
+  const stats = readImageStats();
+  const current = stats[imageId] ?? {
+    correct: 0,
+    wrong: 0,
+    timedOut: 0,
+    total: 0,
+  };
+
+  stats[imageId] = {
+    correct: current.correct + (isCorrect ? 1 : 0),
+    wrong: current.wrong + (isCorrect ? 0 : 1),
+    timedOut: current.timedOut + (timedOut ? 1 : 0),
+    total: current.total + 1,
+  };
+
+  if (typeof window !== "undefined") {
+    window.localStorage.setItem(IMAGE_STATS_KEY, JSON.stringify(stats));
+  }
+
+  return stats;
 }
 
 function selectLeastShown(
@@ -368,10 +440,18 @@ export function TimedQuiz() {
   const [questionStartedAt, setQuestionStartedAt] = useState<number | null>(null);
   const [totalTimeMs, setTotalTimeMs] = useState(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
+  const [imageStats, setImageStats] = useState<ImageStatsMap>({});
   const savedResultIdRef = useRef<string | null>(null);
 
   const currentImage = round[currentIndex];
   const totalImages = round.length;
+  const currentImageStats = currentImage ? imageStats[currentImage.id] : undefined;
+  const currentWrongRate =
+    currentImageStats && currentImageStats.total > 0
+      ? Math.round(
+          (currentImageStats.wrong / currentImageStats.total) * 100,
+        )
+      : null;
   const progressPercent = totalImages
     ? ((currentIndex + (phase === "finished" ? 1 : 0)) / totalImages) * 100
     : 0;
@@ -458,6 +538,7 @@ export function TimedQuiz() {
   useEffect(() => {
     const bootId = window.setTimeout(() => {
       setLeaderboard(readLeaderboard());
+      setImageStats(readImageStats());
       setPhase(hasBothAnswerTypes ? "intro" : "finished");
 
       if (hasBothAnswerTypes) {
@@ -529,6 +610,7 @@ export function TimedQuiz() {
         wrong: previous.wrong + (isCorrect ? 0 : 1),
         timedOut: previous.timedOut + (timedOut ? 1 : 0),
       }));
+      setImageStats(recordImageResult(currentImage.id, isCorrect, timedOut));
 
       setFeedback({
         choice,
@@ -821,6 +903,13 @@ export function TimedQuiz() {
               AI일까요, 사람일까요?
             </h1>
           </div>
+
+          {phase === "question" && currentWrongRate !== null && currentImageStats && (
+            <TrapMeter
+              wrongRate={currentWrongRate}
+              sampleSize={currentImageStats.total}
+            />
+          )}
 
           {phase !== "finished" ? (
             <div className="mt-5 flex items-center justify-center gap-5 sm:gap-7">
@@ -1217,6 +1306,43 @@ function ResultMetric({ label, value }: { label: string; value: string }) {
     <div className="rounded-[1.2rem] bg-black/42 px-3 py-3 ring-1 ring-white/10">
       <p className="truncate text-base font-black text-white">{value}</p>
       <p className="mt-1 text-[0.66rem] font-black text-white/52">{label}</p>
+    </div>
+  );
+}
+
+function TrapMeter({
+  wrongRate,
+  sampleSize,
+}: {
+  wrongRate: number;
+  sampleSize: number;
+}) {
+  const accent =
+    wrongRate >= 66
+      ? "text-[#ff4d6d]"
+      : wrongRate >= 33
+        ? "text-[#f6b73c]"
+        : "text-[#9aff24]";
+  const barWidth = Math.max(3, Math.min(100, wrongRate));
+
+  return (
+    <div className="mt-4 max-w-md">
+      <div className="flex items-center justify-between text-[0.62rem] font-black uppercase tracking-[0.18em] text-white/52">
+        <span className="flex items-center gap-1.5">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ff4d6d] shadow-[0_0_10px_rgba(255,77,109,0.85)]" />
+          함정 지수
+        </span>
+        <span className={`tabular-nums ${accent}`}>
+          {wrongRate}%{" "}
+          <span className="text-white/40">· {sampleSize}명</span>
+        </span>
+      </div>
+      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/14 ring-1 ring-white/8">
+        <div
+          className="h-full rounded-full bg-gradient-to-r from-[#9aff24] via-[#f6b73c] to-[#ff4d6d] shadow-[0_0_18px_rgba(255,77,109,0.45)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+          style={{ width: `${barWidth}%` }}
+        />
+      </div>
     </div>
   );
 }
