@@ -40,6 +40,8 @@ type Feedback = {
 type LeaderboardEntry = {
   id: string;
   name: string;
+  phone: string;
+  instagram: string;
   correct: number;
   wrong: number;
   timedOut: number;
@@ -118,6 +120,8 @@ function isLeaderboardEntry(value: unknown): value is LeaderboardEntry {
   return (
     typeof entry.id === "string" &&
     typeof entry.name === "string" &&
+    (typeof entry.phone === "string" || entry.phone === undefined) &&
+    (typeof entry.instagram === "string" || entry.instagram === undefined) &&
     typeof entry.correct === "number" &&
     typeof entry.wrong === "number" &&
     typeof entry.timedOut === "number" &&
@@ -137,12 +141,17 @@ function readLeaderboard() {
     const raw = window.localStorage.getItem(LEADERBOARD_KEY);
     const parsed: unknown = raw ? JSON.parse(raw) : [];
 
-    return Array.isArray(parsed)
-      ? sortLeaderboard(parsed.filter(isLeaderboardEntry)).slice(
-          0,
-          MAX_LEADERBOARD_ENTRIES,
-        )
-      : [];
+    if (!Array.isArray(parsed)) {
+      return [];
+    }
+
+    const normalized = parsed.filter(isLeaderboardEntry).map((entry) => ({
+      ...entry,
+      phone: entry.phone ?? "",
+      instagram: entry.instagram ?? "",
+    }));
+
+    return sortLeaderboard(normalized).slice(0, MAX_LEADERBOARD_ENTRIES);
   } catch {
     return [];
   }
@@ -215,7 +224,11 @@ export function TimedQuiz() {
   const [feedback, setFeedback] = useState<Feedback | null>(null);
   const [selectedAnswer, setSelectedAnswer] = useState<QuizAnswer | null>(null);
   const [nameInput, setNameInput] = useState("");
+  const [phoneInput, setPhoneInput] = useState("");
+  const [instagramInput, setInstagramInput] = useState("");
   const [playerName, setPlayerName] = useState("");
+  const [playerPhone, setPlayerPhone] = useState("");
+  const [playerInstagram, setPlayerInstagram] = useState("");
   const [questionStartedAt, setQuestionStartedAt] = useState<number | null>(null);
   const [totalTimeMs, setTotalTimeMs] = useState(0);
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([]);
@@ -324,15 +337,19 @@ export function TimedQuiz() {
       event.preventDefault();
 
       const nextName = nameInput.trim().slice(0, 24);
+      const nextPhone = phoneInput.trim().slice(0, 20);
+      const nextInstagram = instagramInput.trim().replace(/^@/, "").slice(0, 30);
 
-      if (!nextName || !isRoundReady) {
+      if (!nextName || !nextPhone || !nextInstagram || !isRoundReady) {
         return;
       }
 
       setPlayerName(nextName);
+      setPlayerPhone(nextPhone);
+      setPlayerInstagram(nextInstagram);
       startRound();
     },
-    [nameInput, isRoundReady, startRound],
+    [nameInput, phoneInput, instagramInput, isRoundReady, startRound],
   );
 
   const returnToIntro = useCallback(() => {
@@ -345,7 +362,11 @@ export function TimedQuiz() {
     setQuestionStartedAt(null);
     setTotalTimeMs(0);
     setPlayerName("");
+    setPlayerPhone("");
+    setPlayerInstagram("");
     setNameInput("");
+    setPhoneInput("");
+    setInstagramInput("");
     savedResultIdRef.current = null;
     prepareNextRound();
     setPhase("intro");
@@ -467,6 +488,8 @@ export function TimedQuiz() {
     const entry: LeaderboardEntry = {
       id: createEntryId(),
       name: playerName,
+      phone: playerPhone,
+      instagram: playerInstagram,
       correct: stats.correct,
       wrong: stats.wrong,
       timedOut: stats.timedOut,
@@ -482,6 +505,8 @@ export function TimedQuiz() {
     hasBothAnswerTypes,
     phase,
     playerName,
+    playerPhone,
+    playerInstagram,
     stats.correct,
     stats.timedOut,
     stats.wrong,
@@ -548,10 +573,14 @@ export function TimedQuiz() {
       <IntroScreen
         leaderboard={leaderboard}
         nameInput={nameInput}
+        phoneInput={phoneInput}
+        instagramInput={instagramInput}
         preloadStatus={preloadStatus}
         preloadedCount={preloadedCount}
         totalPreloadCount={pendingRound.length}
         onNameChange={setNameInput}
+        onPhoneChange={setPhoneInput}
+        onInstagramChange={setInstagramInput}
         onSubmit={handleStartSubmit}
       />
     );
@@ -707,22 +736,34 @@ export function TimedQuiz() {
 function IntroScreen({
   leaderboard,
   nameInput,
+  phoneInput,
+  instagramInput,
   preloadStatus,
   preloadedCount,
   totalPreloadCount,
   onNameChange,
+  onPhoneChange,
+  onInstagramChange,
   onSubmit,
 }: {
   leaderboard: LeaderboardEntry[];
   nameInput: string;
+  phoneInput: string;
+  instagramInput: string;
   preloadStatus: PreloadStatus;
   preloadedCount: number;
   totalPreloadCount: number;
   onNameChange: (value: string) => void;
+  onPhoneChange: (value: string) => void;
+  onInstagramChange: (value: string) => void;
   onSubmit: (event: FormEvent<HTMLFormElement>) => void;
 }) {
   const isReady = preloadStatus === "ready" && totalPreloadCount > 0;
-  const canStart = nameInput.trim().length > 0 && isReady;
+  const canStart =
+    nameInput.trim().length > 0 &&
+    phoneInput.trim().length > 0 &&
+    instagramInput.trim().length > 0 &&
+    isReady;
   const preloadLabel = isReady
     ? "READY"
     : `${preloadedCount}/${totalPreloadCount || ROUND_SIZE}`;
@@ -749,7 +790,7 @@ function IntroScreen({
                   Leviosa Turing Test
                 </div>
                 <h1 className="mt-3 text-[2.1rem] font-black leading-[0.96] tracking-[-0.045em] text-white sm:text-4xl">
-                  이름을 입력하고
+                  정보를 입력하고
                   <span className="block bg-gradient-to-r from-white via-[#d8fff2] to-[#8affca] bg-clip-text text-transparent">
                     감별을 시작하세요
                   </span>
@@ -765,7 +806,7 @@ function IntroScreen({
               </div>
             </div>
 
-            <div className="mt-4 grid grid-cols-[minmax(0,1fr)_auto] gap-2 rounded-[1.35rem] border border-white/10 bg-black/45 p-1.5 shadow-[inset_0_1px_18px_rgba(0,0,0,0.35)]">
+            <div className="mt-4 space-y-2 rounded-[1.35rem] border border-white/10 bg-black/45 p-1.5 shadow-[inset_0_1px_18px_rgba(0,0,0,0.35)]">
               <label className="sr-only" htmlFor="player-name">
                 이름
               </label>
@@ -776,12 +817,40 @@ function IntroScreen({
                 value={nameInput}
                 onChange={(event) => onNameChange(event.target.value)}
                 placeholder="이름"
-                className="h-14 min-w-0 rounded-[1.05rem] bg-transparent px-4 text-xl font-black text-white outline-none transition duration-300 placeholder:text-white/24 focus:bg-white/[0.035]"
+                className="h-12 w-full min-w-0 rounded-[1.05rem] bg-transparent px-4 text-base font-black text-white outline-none transition duration-300 placeholder:text-white/24 focus:bg-white/[0.035]"
+              />
+              <label className="sr-only" htmlFor="player-phone">
+                전화번호
+              </label>
+              <input
+                id="player-phone"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel"
+                maxLength={20}
+                value={phoneInput}
+                onChange={(event) => onPhoneChange(event.target.value)}
+                placeholder="전화번호"
+                className="h-12 w-full min-w-0 rounded-[1.05rem] bg-transparent px-4 text-base font-black text-white outline-none transition duration-300 placeholder:text-white/24 focus:bg-white/[0.035]"
+              />
+              <label className="sr-only" htmlFor="player-instagram">
+                인스타그램 아이디
+              </label>
+              <input
+                id="player-instagram"
+                autoCapitalize="none"
+                autoCorrect="off"
+                spellCheck={false}
+                maxLength={30}
+                value={instagramInput}
+                onChange={(event) => onInstagramChange(event.target.value)}
+                placeholder="인스타그램 아이디"
+                className="h-12 w-full min-w-0 rounded-[1.05rem] bg-transparent px-4 text-base font-black text-white outline-none transition duration-300 placeholder:text-white/24 focus:bg-white/[0.035]"
               />
               <button
                 type="submit"
                 disabled={!canStart}
-                className="group relative h-14 shrink-0 overflow-hidden rounded-[1.05rem] bg-white px-5 text-base font-black text-black shadow-[0_14px_32px_-18px_rgba(255,255,255,0.85)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:pointer-events-none disabled:bg-white/28 disabled:text-white/38 disabled:shadow-none"
+                className="group relative h-12 w-full shrink-0 overflow-hidden rounded-[1.05rem] bg-white px-5 text-base font-black text-black shadow-[0_14px_32px_-18px_rgba(255,255,255,0.85)] transition duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] active:scale-[0.98] disabled:pointer-events-none disabled:bg-white/28 disabled:text-white/38 disabled:shadow-none"
               >
                 <span className="absolute inset-0 translate-x-[-120%] bg-gradient-to-r from-transparent via-[#9aff24]/65 to-transparent transition duration-700 group-hover:translate-x-[120%]" />
                 <span className="relative">{isReady ? "시작" : "준비"}</span>
