@@ -21,7 +21,6 @@ const SECONDS_PER_IMAGE = 10;
 const FEEDBACK_MS = 900;
 const LEADERBOARD_KEY = "leviosa-turing-test-leaderboard-v1";
 const EXPOSURE_KEY = "leviosa-turing-test-image-exposure-v1";
-const MAX_LEADERBOARD_ENTRIES = 12;
 
 type Phase = "booting" | "intro" | "question" | "feedback" | "finished";
 type PreloadStatus = "idle" | "loading" | "ready";
@@ -227,17 +226,14 @@ function readLeaderboard() {
       shownImageIds: entry.shownImageIds ?? [],
     }));
 
-    return sortLeaderboard(normalized).slice(0, MAX_LEADERBOARD_ENTRIES);
+    return sortLeaderboard(normalized);
   } catch {
     return [];
   }
 }
 
 function saveLeaderboardEntry(entry: LeaderboardEntry) {
-  const nextEntries = sortLeaderboard([...readLeaderboard(), entry]).slice(
-    0,
-    MAX_LEADERBOARD_ENTRIES,
-  );
+  const nextEntries = sortLeaderboard([...readLeaderboard(), entry]);
 
   window.localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(nextEntries));
 
