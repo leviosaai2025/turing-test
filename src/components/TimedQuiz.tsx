@@ -861,6 +861,15 @@ export function TimedQuiz() {
               style={{ width: `${progressPercent}%` }}
             />
           </div>
+
+          {phase === "question" && currentWrongRate !== null && currentImageStats && (
+            <div className="mt-4">
+              <TrapMeter
+                wrongRate={currentWrongRate}
+                sampleSize={currentImageStats.total}
+              />
+            </div>
+          )}
         </div>
 
         <div className="absolute right-4 top-32 z-10 sm:right-6 sm:top-36">
@@ -903,13 +912,6 @@ export function TimedQuiz() {
               AI일까요, 사람일까요?
             </h1>
           </div>
-
-          {phase === "question" && currentWrongRate !== null && currentImageStats && (
-            <TrapMeter
-              wrongRate={currentWrongRate}
-              sampleSize={currentImageStats.total}
-            />
-          )}
 
           {phase !== "finished" ? (
             <div className="mt-5 flex items-center justify-center gap-5 sm:gap-7">
@@ -1317,29 +1319,23 @@ function TrapMeter({
   wrongRate: number;
   sampleSize: number;
 }) {
-  const accent =
-    wrongRate >= 66
-      ? "text-[#ff4d6d]"
-      : wrongRate >= 33
-        ? "text-[#f6b73c]"
-        : "text-[#9aff24]";
   const barWidth = Math.max(3, Math.min(100, wrongRate));
 
   return (
-    <div className="mt-4 max-w-md">
-      <div className="flex items-center justify-between text-[0.62rem] font-black uppercase tracking-[0.18em] text-white/52">
+    <div>
+      <div className="flex items-center justify-between text-[0.62rem] font-black uppercase tracking-[0.18em] text-white/72">
         <span className="flex items-center gap-1.5">
-          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ff4d6d] shadow-[0_0_10px_rgba(255,77,109,0.85)]" />
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ff0033] shadow-[0_0_10px_rgba(255,0,51,0.95)]" />
           오답률
         </span>
-        <span className={`tabular-nums ${accent}`}>
+        <span className="tabular-nums text-white">
           {wrongRate}%{" "}
-          <span className="text-white/40">· {sampleSize}명</span>
+          <span className="text-white/50">· {sampleSize}명</span>
         </span>
       </div>
-      <div className="mt-1.5 h-1.5 overflow-hidden rounded-full bg-white/14 ring-1 ring-white/8">
+      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-white/14 ring-1 ring-white/10">
         <div
-          className="h-full rounded-full bg-gradient-to-r from-[#9aff24] via-[#f6b73c] to-[#ff4d6d] shadow-[0_0_18px_rgba(255,77,109,0.45)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
+          className="h-full rounded-full bg-[#ff0033] shadow-[0_0_18px_rgba(255,0,51,0.55)] transition-all duration-500 ease-[cubic-bezier(0.32,0.72,0,1)]"
           style={{ width: `${barWidth}%` }}
         />
       </div>
