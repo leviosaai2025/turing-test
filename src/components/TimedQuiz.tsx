@@ -16,9 +16,11 @@ import {
 } from "@/data/quiz-images.generated";
 
 const ROUND_SIZE = 10;
+const CANDIDATE_POOL_SIZE = ROUND_SIZE * 2;
 const SECONDS_PER_IMAGE = 10;
 const FEEDBACK_MS = 900;
 const LEADERBOARD_KEY = "leviosa-turing-test-leaderboard-v1";
+const EXPOSURE_KEY = "leviosa-turing-test-image-exposure-v1";
 const MAX_LEADERBOARD_ENTRIES = 12;
 
 type Phase = "booting" | "intro" | "question" | "feedback" | "finished";
@@ -49,6 +51,7 @@ type LeaderboardEntry = {
   accuracy: number;
   totalTimeMs: number;
   createdAt: string;
+  shownImageIds: string[];
 };
 
 const answerLabels: Record<QuizAnswer, string> = {
@@ -67,8 +70,77 @@ function shuffleImages(images: QuizImage[]) {
   return next;
 }
 
+function readExposureCounts(): Record<string, number> {
+  if (typeof window === "undefined") {
+    return {};
+  }
+
+  try {
+    const raw = window.localStorage.getItem(EXPOSURE_KEY);
+    const parsed: unknown = raw ? JSON.parse(raw) : {};
+
+    if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
+      return {};
+    }
+
+    const result: Record<string, number> = {};
+
+    for (const [key, value] of Object.entries(parsed)) {
+      if (typeof value === "number" && Number.isFinite(value)) {
+        result[key] = value;
+      }
+    }
+
+    return result;
+  } catch {
+    return {};
+  }
+}
+
+function recordExposure(imageIds: string[]) {
+  if (typeof window === "undefined" || imageIds.length === 0) {
+    return;
+  }
+
+  const counts = readExposureCounts();
+
+  for (const id of imageIds) {
+    counts[id] = (counts[id] ?? 0) + 1;
+  }
+
+  window.localStorage.setItem(EXPOSURE_KEY, JSON.stringify(counts));
+}
+
+function selectLeastShown(
+  candidates: QuizImage[],
+  exposureCounts: Record<string, number>,
+  size: number,
+) {
+  const decorated = candidates.map((image) => ({
+    image,
+    count: exposureCounts[image.id] ?? 0,
+    tiebreak: Math.random(),
+  }));
+
+  decorated.sort(
+    (a, b) => a.count - b.count || a.tiebreak - b.tiebreak,
+  );
+
+  return decorated.slice(0, size).map((item) => item.image);
+}
+
 function createRound() {
-  return shuffleImages(quizImages).slice(0, ROUND_SIZE);
+  if (quizImages.length === 0) {
+    return [];
+  }
+
+  const candidatePoolSize = Math.min(CANDIDATE_POOL_SIZE, quizImages.length);
+  const candidates = shuffleImages(quizImages).slice(0, candidatePoolSize);
+  const exposureCounts = readExposureCounts();
+  const targetSize = Math.min(ROUND_SIZE, candidates.length);
+  const selected = selectLeastShown(candidates, exposureCounts, targetSize);
+
+  return shuffleImages(selected);
 }
 
 function verdictForScore(correct: number, total: number) {
@@ -128,7 +200,10 @@ function isLeaderboardEntry(value: unknown): value is LeaderboardEntry {
     typeof entry.total === "number" &&
     typeof entry.accuracy === "number" &&
     typeof entry.totalTimeMs === "number" &&
-    typeof entry.createdAt === "string"
+    typeof entry.createdAt === "string" &&
+    (entry.shownImageIds === undefined ||
+      (Array.isArray(entry.shownImageIds) &&
+        entry.shownImageIds.every((id) => typeof id === "string")))
   );
 }
 
@@ -149,6 +224,7 @@ function readLeaderboard() {
       ...entry,
       phone: entry.phone ?? "",
       instagram: entry.instagram ?? "",
+      shownImageIds: entry.shownImageIds ?? [],
     }));
 
     return sortLeaderboard(normalized).slice(0, MAX_LEADERBOARD_ENTRIES);
@@ -207,6 +283,7 @@ function downloadLeaderboardCsv(entries: LeaderboardEntry[]) {
     "정답률(%)",
     "소요시간(초)",
     "기록시각",
+    "본 이미지 ID들",
   ];
 
   const rows = entries.map((entry, index) => [
@@ -221,6 +298,7 @@ function downloadLeaderboardCsv(entries: LeaderboardEntry[]) {
     entry.accuracy,
     (entry.totalTimeMs / 1000).toFixed(2),
     entry.createdAt,
+    (entry.shownImageIds ?? []).join(";"),
   ]);
 
   const csvBody = [header, ...rows]
@@ -430,9 +508,8 @@ export function TimedQuiz() {
     setPhoneInput("");
     setInstagramInput("");
     savedResultIdRef.current = null;
-    prepareNextRound();
     setPhase("intro");
-  }, [prepareNextRound]);
+  }, []);
 
   const finishQuestion = useCallback(
     (choice: QuizAnswer | null, timedOut = false) => {
@@ -547,6 +624,8 @@ export function TimedQuiz() {
       return;
     }
 
+    const shownImageIds = round.map((image) => image.id);
+
     const entry: LeaderboardEntry = {
       id: createEntryId(),
       name: playerName,
@@ -559,9 +638,11 @@ export function TimedQuiz() {
       accuracy: Math.round((stats.correct / totalImages) * 100),
       totalTimeMs,
       createdAt: new Date().toISOString(),
+      shownImageIds,
     };
 
     savedResultIdRef.current = entry.id;
+    recordExposure(shownImageIds);
     setLeaderboard(saveLeaderboardEntry(entry));
   }, [
     hasBothAnswerTypes,
@@ -569,11 +650,30 @@ export function TimedQuiz() {
     playerName,
     playerPhone,
     playerInstagram,
+    round,
     stats.correct,
     stats.timedOut,
     stats.wrong,
     totalImages,
     totalTimeMs,
+  ]);
+
+  useEffect(() => {
+    if (phase !== "finished" || !hasBothAnswerTypes) {
+      return;
+    }
+
+    if (pendingRound.length > 0 || preloadStatus === "loading") {
+      return;
+    }
+
+    prepareNextRound();
+  }, [
+    hasBothAnswerTypes,
+    pendingRound.length,
+    phase,
+    preloadStatus,
+    prepareNextRound,
   ]);
 
   const finalVerdict = useMemo(
@@ -1049,11 +1149,9 @@ function LeaderboardList({ entries }: { entries: LeaderboardEntry[] }) {
                         </span>
                       )}
                     </div>
-                    {(entry.instagram || entry.phone) && (
+                    {entry.instagram && (
                       <p className="mt-1 truncate text-[0.7rem] font-bold leading-none text-white/52">
-                        {entry.instagram && `@${entry.instagram}`}
-                        {entry.instagram && entry.phone && " · "}
-                        {entry.phone}
+                        @{entry.instagram}
                       </p>
                     )}
                     <p className="mt-1.5 truncate text-sm font-bold leading-none text-white/45">
