@@ -11,351 +11,327 @@ export type QuizImage = {
 
 export const quizImages: QuizImage[] = [
   {
-    "id": "ai-1-MDEtZWxldmF0b3It",
-    "src": "/ai/01-elevator-ootd%20(1).webp",
+    "id": "ai-1-MDQtbGlmZXN0eWxl",
+    "src": "/ai/04-lifestyle-seoul-street.png",
     "answer": "ai",
-    "fileName": "01-elevator-ootd (1).webp"
+    "fileName": "04-lifestyle-seoul-street.png"
   },
   {
-    "id": "ai-2-MDItYmVkcm9vbS1t",
-    "src": "/ai/02-bedroom-mirror.webp",
+    "id": "ai-2-MWFkODRiOWFiNGEx",
+    "src": "/ai/1ad84b9ab4a1e2ab17c7aab37fcff0a5.png",
     "answer": "ai",
-    "fileName": "02-bedroom-mirror.webp"
+    "fileName": "1ad84b9ab4a1e2ab17c7aab37fcff0a5.png"
   },
   {
-    "id": "ai-3-MDQtbGlmZXN0eWxl",
-    "src": "/ai/04-lifestyle-seoul-street.webp",
+    "id": "ai-3-MWM3MTVmNzM0Zjdh",
+    "src": "/ai/1c715f734f7ac4ad03865b7e6f4e67dd.png",
     "answer": "ai",
-    "fileName": "04-lifestyle-seoul-street.webp"
+    "fileName": "1c715f734f7ac4ad03865b7e6f4e67dd.png"
   },
   {
-    "id": "ai-4-MDUtY2FyLWNsb3Nl",
-    "src": "/ai/05-car-closeup.webp",
+    "id": "ai-4-MjA0MWI1ZTgzMmVl",
+    "src": "/ai/2041b5e832ee3e2c0c837df220c85ea3.png",
     "answer": "ai",
-    "fileName": "05-car-closeup.webp"
+    "fileName": "2041b5e832ee3e2c0c837df220c85ea3.png"
   },
   {
-    "id": "ai-5-MDUtc3Vid2F5LWNh",
-    "src": "/ai/05-subway-candid.webp",
+    "id": "ai-5-MjliNWMxMjM3NDA5",
+    "src": "/ai/29b5c123740923affd2a0239674f1664.png",
     "answer": "ai",
-    "fileName": "05-subway-candid.webp"
+    "fileName": "29b5c123740923affd2a0239674f1664.png"
   },
   {
-    "id": "ai-6-Q2hhdEdQVCBJbWFn",
-    "src": "/ai/ChatGPT%20Image%207%20%D0%BC%D0%B0%D1%8F%202026%20%D0%B3.%2C%2015_04_31%C2%A0%E2%80%94%20%D0%BA%D0%BE%D0%BF%D0%B8%D1%8F%20(1).webp",
+    "id": "ai-6-NDljNzJjMTdlN2Qz",
+    "src": "/ai/49c72c17e7d3816d2b42aa6eacaf0525.png",
     "answer": "ai",
-    "fileName": "ChatGPT Image 7 мая 2026 г., 15_04_31 — копия (1).webp"
+    "fileName": "49c72c17e7d3816d2b42aa6eacaf0525.png"
   },
   {
-    "id": "ai-7-ZmluYWwtMDEgKDQp",
-    "src": "/ai/final-01%20(4).webp",
+    "id": "ai-7-NGE5Yjk0ZmVmODA1",
+    "src": "/ai/4a9b94fef805140bdd286d5575653831.png",
     "answer": "ai",
-    "fileName": "final-01 (4).webp"
+    "fileName": "4a9b94fef805140bdd286d5575653831.png"
   },
   {
-    "id": "ai-8-ZmluYWwtMDEgKDYp",
-    "src": "/ai/final-01%20(6).webp",
+    "id": "ai-8-NWEyYWFkOTc4ODFh",
+    "src": "/ai/5a2aad97881af3361dda844772fee540.png",
     "answer": "ai",
-    "fileName": "final-01 (6).webp"
+    "fileName": "5a2aad97881af3361dda844772fee540.png"
   },
   {
-    "id": "ai-9-ZmluYWwtMDEgKDcp",
-    "src": "/ai/final-01%20(7).webp",
+    "id": "ai-9-OGVlZDUyYzExMGU1",
+    "src": "/ai/8eed52c110e5fed7e290b54442f2ea2f.png",
     "answer": "ai",
-    "fileName": "final-01 (7).webp"
+    "fileName": "8eed52c110e5fed7e290b54442f2ea2f.png"
   },
   {
-    "id": "ai-10-ZmluYWwtMDEgKDgp",
-    "src": "/ai/final-01%20(8).webp",
+    "id": "ai-10-YTMyNDU0M2Y1OGVi",
+    "src": "/ai/a324543f58eb43c8a56f9b5463652544.png",
     "answer": "ai",
-    "fileName": "final-01 (8).webp"
+    "fileName": "a324543f58eb43c8a56f9b5463652544.png"
   },
   {
-    "id": "ai-11-ZmluYWwtMDIgKDEw",
-    "src": "/ai/final-02%20(10).webp",
+    "id": "ai-11-YTcwOGI2MTZiYjgx",
+    "src": "/ai/a708b616bb81cdb99232ebd6bfe868ea.png",
     "answer": "ai",
-    "fileName": "final-02 (10).webp"
+    "fileName": "a708b616bb81cdb99232ebd6bfe868ea.png"
   },
   {
-    "id": "ai-12-ZmluYWwtMDIgKDEx",
-    "src": "/ai/final-02%20(11).webp",
+    "id": "ai-12-YWI1M2VlNWE2YzI2",
+    "src": "/ai/ab53ee5a6c26498880c9bd6148bbdc05.png",
     "answer": "ai",
-    "fileName": "final-02 (11).webp"
+    "fileName": "ab53ee5a6c26498880c9bd6148bbdc05.png"
   },
   {
-    "id": "ai-13-ZmluYWwtMDMgKDYp",
-    "src": "/ai/final-03%20(6).webp",
+    "id": "ai-13-YjA3ZTZkY2MyYTgx",
+    "src": "/ai/b07e6dcc2a81aceb974c201513c73176.png",
     "answer": "ai",
-    "fileName": "final-03 (6).webp"
+    "fileName": "b07e6dcc2a81aceb974c201513c73176.png"
   },
   {
-    "id": "ai-14-ZmluYWwtMDUgKDEx",
-    "src": "/ai/final-05%20(11).webp",
+    "id": "ai-14-Y2RmOWIwMTEwM2U1",
+    "src": "/ai/cdf9b01103e595296e558cb5dd739bd2.png",
     "answer": "ai",
-    "fileName": "final-05 (11).webp"
+    "fileName": "cdf9b01103e595296e558cb5dd739bd2.png"
   },
   {
-    "id": "ai-15-ZmluYWwtMDUgKDEy",
-    "src": "/ai/final-05%20(12).webp",
+    "id": "ai-15-Y2Y4NzMwN2E4ODdi",
+    "src": "/ai/cf87307a887be542469a22940b5c6b57.png",
     "answer": "ai",
-    "fileName": "final-05 (12).webp"
+    "fileName": "cf87307a887be542469a22940b5c6b57.png"
   },
   {
-    "id": "ai-16-ZmluYWwtMDYtZmxv",
-    "src": "/ai/final-06-floor-brow.webp",
+    "id": "ai-16-ZjBhZDU5ZjMxZmQ2",
+    "src": "/ai/f0ad59f31fd6a280a90b736e2d1769cc.png",
     "answer": "ai",
-    "fileName": "final-06-floor-brow.webp"
+    "fileName": "f0ad59f31fd6a280a90b736e2d1769cc.png"
   },
   {
-    "id": "ai-17-aGZfMjAyNjA1MDdf",
-    "src": "/ai/hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.webp",
+    "id": "ai-17-ZmluYWwtMDEgKDYp",
+    "src": "/ai/final-01%20(6).png",
     "answer": "ai",
-    "fileName": "hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.webp"
+    "fileName": "final-01 (6).png"
   },
   {
-    "id": "ai-18-c2hvdC0wMV9ncHQt",
-    "src": "/ai/shot-01_gpt-image.webp",
+    "id": "ai-18-ZmluYWwtMDMgKDYp",
+    "src": "/ai/final-03%20(6).png",
     "answer": "ai",
-    "fileName": "shot-01_gpt-image.webp"
+    "fileName": "final-03 (6).png"
   },
   {
-    "id": "ai-19-c2hvdC0wMWIgKDEp",
-    "src": "/ai/shot-01b%20(1).webp",
+    "id": "ai-19-ZmluYWwtMDUgKDEy",
+    "src": "/ai/final-05%20(12).png",
     "answer": "ai",
-    "fileName": "shot-01b (1).webp"
+    "fileName": "final-05 (12).png"
   },
   {
-    "id": "ai-20-c2hvdC0wMWIgKDIp",
-    "src": "/ai/shot-01b%20(2).webp",
+    "id": "ai-20-aGZfMjAyNjA1MDdf",
+    "src": "/ai/hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.png",
     "answer": "ai",
-    "fileName": "shot-01b (2).webp"
+    "fileName": "hf_20260507_053535_40f59618-b71c-4118-ae1c-a3d77e2919dd.png"
   },
   {
-    "id": "ai-21-c2hvdC0wMWJfbmFu",
-    "src": "/ai/shot-01b_nano-pro%20(1).webp",
+    "id": "ai-21-c2hvdC0wMmFfbmFu",
+    "src": "/ai/shot-02a_nano-pro%20(1).png",
     "answer": "ai",
-    "fileName": "shot-01b_nano-pro (1).webp"
+    "fileName": "shot-02a_nano-pro (1).png"
   },
   {
-    "id": "ai-22-c2hvdC0wMiAoMiku",
-    "src": "/ai/shot-02%20(2).webp",
+    "id": "ai-22-c2hvdC0wMmIgKDEp",
+    "src": "/ai/shot-02b%20(1).png",
     "answer": "ai",
-    "fileName": "shot-02 (2).webp"
+    "fileName": "shot-02b (1).png"
   },
   {
-    "id": "ai-23-c2hvdC0wMmFfbmFu",
-    "src": "/ai/shot-02a_nano-pro%20(1).webp",
+    "id": "ai-23-c2hvdC0wM2FfbmFu",
+    "src": "/ai/shot-03a_nano-pro%20(4).png",
     "answer": "ai",
-    "fileName": "shot-02a_nano-pro (1).webp"
+    "fileName": "shot-03a_nano-pro (4).png"
   },
   {
-    "id": "ai-24-c2hvdC0wMmIgKDEp",
-    "src": "/ai/shot-02b%20(1).webp",
+    "id": "ai-24-c2hvdC0wNSAoNCku",
+    "src": "/ai/shot-05%20(4).png",
     "answer": "ai",
-    "fileName": "shot-02b (1).webp"
+    "fileName": "shot-05 (4).png"
   },
   {
-    "id": "ai-25-c2hvdC0wMmIgKDIp",
-    "src": "/ai/shot-02b%20(2).webp",
+    "id": "ai-25-c2hvdC0wNWFfbmFu",
+    "src": "/ai/shot-05a_nano-pro%20(4).png",
     "answer": "ai",
-    "fileName": "shot-02b (2).webp"
+    "fileName": "shot-05a_nano-pro (4).png"
   },
   {
-    "id": "ai-26-c2hvdC0wMmJfbmFu",
-    "src": "/ai/shot-02b_nano-pro.webp",
+    "id": "ai-26-c2hvdC0wNWJfbmFu",
+    "src": "/ai/shot-05b_nano-pro%20(1).jpg",
     "answer": "ai",
-    "fileName": "shot-02b_nano-pro.webp"
+    "fileName": "shot-05b_nano-pro (1).jpg"
   },
   {
-    "id": "ai-27-c2hvdC0wMmJfbmFu",
-    "src": "/ai/shot-02b_nano.webp",
+    "id": "ai-27-c2hvdC0wOF9uYW5v",
+    "src": "/ai/shot-08_nano-pro.png",
     "answer": "ai",
-    "fileName": "shot-02b_nano.webp"
+    "fileName": "shot-08_nano-pro.png"
   },
   {
-    "id": "ai-28-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(3).webp",
+    "id": "ai-28-c2hvdC0xM19uYW5v",
+    "src": "/ai/shot-13_nano-pro_nano-pro.png",
     "answer": "ai",
-    "fileName": "shot-03a_nano-pro (3).webp"
+    "fileName": "shot-13_nano-pro_nano-pro.png"
   },
   {
-    "id": "ai-29-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(4).webp",
-    "answer": "ai",
-    "fileName": "shot-03a_nano-pro (4).webp"
-  },
-  {
-    "id": "ai-30-c2hvdC0wM2FfbmFu",
-    "src": "/ai/shot-03a_nano-pro%20(5).webp",
-    "answer": "ai",
-    "fileName": "shot-03a_nano-pro (5).webp"
-  },
-  {
-    "id": "ai-31-c2hvdC0wM2IgKDQp",
-    "src": "/ai/shot-03b%20(4).webp",
-    "answer": "ai",
-    "fileName": "shot-03b (4).webp"
-  },
-  {
-    "id": "ai-32-c2hvdC0wNF9ncHQt",
-    "src": "/ai/shot-04_gpt-image.webp",
-    "answer": "ai",
-    "fileName": "shot-04_gpt-image.webp"
-  },
-  {
-    "id": "ai-33-c2hvdC0wNGIgKDEp",
-    "src": "/ai/shot-04b%20(1).webp",
-    "answer": "ai",
-    "fileName": "shot-04b (1).webp"
-  },
-  {
-    "id": "ai-34-c2hvdC0wNSAoNCku",
-    "src": "/ai/shot-05%20(4).webp",
-    "answer": "ai",
-    "fileName": "shot-05 (4).webp"
-  },
-  {
-    "id": "ai-35-c2hvdC0wNSAoNSku",
-    "src": "/ai/shot-05%20(5).webp",
-    "answer": "ai",
-    "fileName": "shot-05 (5).webp"
-  },
-  {
-    "id": "ai-36-c2hvdC0wNWFfbmFu",
-    "src": "/ai/shot-05a_nano-pro%20(3).webp",
-    "answer": "ai",
-    "fileName": "shot-05a_nano-pro (3).webp"
-  },
-  {
-    "id": "ai-37-c2hvdC0wNWFfbmFu",
-    "src": "/ai/shot-05a_nano-pro%20(4).webp",
-    "answer": "ai",
-    "fileName": "shot-05a_nano-pro (4).webp"
-  },
-  {
-    "id": "ai-38-c2hvdC0wNWJfbmFu",
-    "src": "/ai/shot-05b_nano-pro%20(1)-2.webp",
-    "answer": "ai",
-    "fileName": "shot-05b_nano-pro (1)-2.webp"
-  },
-  {
-    "id": "ai-39-c2hvdC0wNWJfbmFu",
-    "src": "/ai/shot-05b_nano-pro%20(1).webp",
-    "answer": "ai",
-    "fileName": "shot-05b_nano-pro (1).webp"
-  },
-  {
-    "id": "ai-40-c2hvdC0wNWIud2Vi",
-    "src": "/ai/shot-05b.webp",
-    "answer": "ai",
-    "fileName": "shot-05b.webp"
-  },
-  {
-    "id": "ai-41-c2hvdC0wNyAoMyku",
-    "src": "/ai/shot-07%20(3).webp",
-    "answer": "ai",
-    "fileName": "shot-07 (3).webp"
-  },
-  {
-    "id": "ai-42-c2hvdC0wOCAoMyku",
-    "src": "/ai/shot-08%20(3).webp",
-    "answer": "ai",
-    "fileName": "shot-08 (3).webp"
-  },
-  {
-    "id": "ai-43-c2hvdC0wOF9uYW5v",
-    "src": "/ai/shot-08_nano-pro.webp",
-    "answer": "ai",
-    "fileName": "shot-08_nano-pro.webp"
-  },
-  {
-    "id": "ai-44-c2hvdC0wOSAoMiku",
-    "src": "/ai/shot-09%20(2).webp",
-    "answer": "ai",
-    "fileName": "shot-09 (2).webp"
-  },
-  {
-    "id": "ai-45-c2hvdC0xMV9uYW5v",
-    "src": "/ai/shot-11_nano-pro_nano-pro%20(1).webp",
-    "answer": "ai",
-    "fileName": "shot-11_nano-pro_nano-pro (1).webp"
-  },
-  {
-    "id": "ai-46-c2hvdC0xM19uYW5v",
-    "src": "/ai/shot-13_nano-pro_nano-pro.webp",
-    "answer": "ai",
-    "fileName": "shot-13_nano-pro_nano-pro.webp"
-  },
-  {
-    "id": "human-1-MDY3YzQ1OTEtZWI4",
-    "src": "/human/067c4591-eb84-4269-b640-98eb99d40dc5.webp",
+    "id": "human-1-MDMwOWQzZmE5N2Nk",
+    "src": "/human/0309d3fa97cde8853f9206a23ed1addb.jpg",
     "answer": "human",
-    "fileName": "067c4591-eb84-4269-b640-98eb99d40dc5.webp"
+    "fileName": "0309d3fa97cde8853f9206a23ed1addb.jpg"
   },
   {
-    "id": "human-2-MzAyOWQwNWEtMjU4",
-    "src": "/human/3029d05a-258f-49f3-bee0-d328b2bda808.webp",
+    "id": "human-2-MWFkODRiOWFiNGEx",
+    "src": "/human/1ad84b9ab4a1e2ab17c7aab37fcff0a5.jpg",
     "answer": "human",
-    "fileName": "3029d05a-258f-49f3-bee0-d328b2bda808.webp"
+    "fileName": "1ad84b9ab4a1e2ab17c7aab37fcff0a5.jpg"
   },
   {
-    "id": "human-3-M2I0OTZlMDktYzY5",
+    "id": "human-3-MWM3MTVmNzM0Zjdh",
+    "src": "/human/1c715f734f7ac4ad03865b7e6f4e67dd.jpg",
+    "answer": "human",
+    "fileName": "1c715f734f7ac4ad03865b7e6f4e67dd.jpg"
+  },
+  {
+    "id": "human-4-MjA0MWI1ZTgzMmVl",
+    "src": "/human/2041b5e832ee3e2c0c837df220c85ea3.jpg",
+    "answer": "human",
+    "fileName": "2041b5e832ee3e2c0c837df220c85ea3.jpg"
+  },
+  {
+    "id": "human-5-MjliNWMxMjM3NDA5",
+    "src": "/human/29b5c123740923affd2a0239674f1664.jpg",
+    "answer": "human",
+    "fileName": "29b5c123740923affd2a0239674f1664.jpg"
+  },
+  {
+    "id": "human-6-M2I0OTZlMDktYzY5",
     "src": "/human/3b496e09-c698-46ff-b6a5-31ebc40084aa.webp",
     "answer": "human",
     "fileName": "3b496e09-c698-46ff-b6a5-31ebc40084aa.webp"
   },
   {
-    "id": "human-4-NTUzNmU0ZmEtN2Ez",
+    "id": "human-7-NDljNzJjMTdlN2Qz",
+    "src": "/human/49c72c17e7d3816d2b42aa6eacaf0525.jpg",
+    "answer": "human",
+    "fileName": "49c72c17e7d3816d2b42aa6eacaf0525.jpg"
+  },
+  {
+    "id": "human-8-NGE5Yjk0ZmVmODA1",
+    "src": "/human/4a9b94fef805140bdd286d5575653831.jpg",
+    "answer": "human",
+    "fileName": "4a9b94fef805140bdd286d5575653831.jpg"
+  },
+  {
+    "id": "human-9-NTUzNmU0ZmEtN2Ez",
     "src": "/human/5536e4fa-7a33-4ee5-98e8-4df6a763135c.webp",
     "answer": "human",
     "fileName": "5536e4fa-7a33-4ee5-98e8-4df6a763135c.webp"
   },
   {
-    "id": "human-5-NzQ5Zjc1YzNlYjg5",
-    "src": "/human/749f75c3eb89d388f77f207255b2e6e1.webp",
+    "id": "human-10-NWEyYWFkOTc4ODFh",
+    "src": "/human/5a2aad97881af3361dda844772fee540.jpg",
     "answer": "human",
-    "fileName": "749f75c3eb89d388f77f207255b2e6e1.webp"
+    "fileName": "5a2aad97881af3361dda844772fee540.jpg"
   },
   {
-    "id": "human-6-OTNkNDg0NDgtYWFl",
-    "src": "/human/93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.webp",
+    "id": "human-11-NmE3MGY5MWIzZmNi",
+    "src": "/human/6a70f91b3fcbc174538a41500f726b23.jpg",
     "answer": "human",
-    "fileName": "93d48448-aaea-44ef-9cd1-13cb8d7cbbaa.webp"
+    "fileName": "6a70f91b3fcbc174538a41500f726b23.jpg"
   },
   {
-    "id": "human-7-YjQ5NmI0NzQtNmIy",
+    "id": "human-12-OGVlZDUyYzExMGU1",
+    "src": "/human/8eed52c110e5fed7e290b54442f2ea2f.jpg",
+    "answer": "human",
+    "fileName": "8eed52c110e5fed7e290b54442f2ea2f.jpg"
+  },
+  {
+    "id": "human-13-YTMyNDU0M2Y1OGVi",
+    "src": "/human/a324543f58eb43c8a56f9b5463652544.jpg",
+    "answer": "human",
+    "fileName": "a324543f58eb43c8a56f9b5463652544.jpg"
+  },
+  {
+    "id": "human-14-YTcwOGI2MTZiYjgx",
+    "src": "/human/a708b616bb81cdb99232ebd6bfe868ea.jpg",
+    "answer": "human",
+    "fileName": "a708b616bb81cdb99232ebd6bfe868ea.jpg"
+  },
+  {
+    "id": "human-15-YWI1M2VlNWE2YzI2",
+    "src": "/human/ab53ee5a6c26498880c9bd6148bbdc05.jpg",
+    "answer": "human",
+    "fileName": "ab53ee5a6c26498880c9bd6148bbdc05.jpg"
+  },
+  {
+    "id": "human-16-YjA3ZTZkY2MyYTgx",
+    "src": "/human/b07e6dcc2a81aceb974c201513c73176.jpg",
+    "answer": "human",
+    "fileName": "b07e6dcc2a81aceb974c201513c73176.jpg"
+  },
+  {
+    "id": "human-17-YjBlMzAzNDQ0NWU0",
+    "src": "/human/b0e3034445e478299a52c41d2ffb5e72.jpg",
+    "answer": "human",
+    "fileName": "b0e3034445e478299a52c41d2ffb5e72.jpg"
+  },
+  {
+    "id": "human-18-YjQ5NmI0NzQtNmIy",
     "src": "/human/b496b474-6b27-480d-8049-8e272a486a6a.webp",
     "answer": "human",
     "fileName": "b496b474-6b27-480d-8049-8e272a486a6a.webp"
   },
   {
-    "id": "human-8-YmJhZjRjYTMtOWE2",
-    "src": "/human/bbaf4ca3-9a64-4281-8075-7b96231599ea.webp",
-    "answer": "human",
-    "fileName": "bbaf4ca3-9a64-4281-8075-7b96231599ea.webp"
-  },
-  {
-    "id": "human-9-YmNkNTM4MGMtNjNl",
+    "id": "human-19-YmNkNTM4MGMtNjNl",
     "src": "/human/bcd5380c-63e3-419e-b99b-b4caae5488d6.webp",
     "answer": "human",
     "fileName": "bcd5380c-63e3-419e-b99b-b4caae5488d6.webp"
   },
   {
-    "id": "human-10-YzIwY2M2NDYtZjZj",
+    "id": "human-20-YzIwY2M2NDYtZjZj",
     "src": "/human/c20cc646-f6cc-4a65-bb49-f01a92ed777e.webp",
     "answer": "human",
     "fileName": "c20cc646-f6cc-4a65-bb49-f01a92ed777e.webp"
   },
   {
-    "id": "human-11-ZWViYzg3OTMtZGVl",
+    "id": "human-21-Y2RmOWIwMTEwM2U1",
+    "src": "/human/cdf9b01103e595296e558cb5dd739bd2.jpg",
+    "answer": "human",
+    "fileName": "cdf9b01103e595296e558cb5dd739bd2.jpg"
+  },
+  {
+    "id": "human-22-Y2Y4NzMwN2E4ODdi",
+    "src": "/human/cf87307a887be542469a22940b5c6b57.jpg",
+    "answer": "human",
+    "fileName": "cf87307a887be542469a22940b5c6b57.jpg"
+  },
+  {
+    "id": "human-23-ZDk3N2IxNjg1NDZj",
+    "src": "/human/d977b168546c9a6fcd3f716252de434d.jpg",
+    "answer": "human",
+    "fileName": "d977b168546c9a6fcd3f716252de434d.jpg"
+  },
+  {
+    "id": "human-24-ZWViYzg3OTMtZGVl",
     "src": "/human/eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.webp",
     "answer": "human",
     "fileName": "eebc8793-dee5-4f6d-96e8-82cd9ab2b9a8.webp"
   },
   {
-    "id": "human-12-ZmY4ZDljZDgtNDAx",
-    "src": "/human/ff8d9cd8-4014-4729-9663-c31d2ac2733a.webp",
+    "id": "human-25-ZjBhZDU5ZjMxZmQ2",
+    "src": "/human/f0ad59f31fd6a280a90b736e2d1769cc.jpg",
     "answer": "human",
-    "fileName": "ff8d9cd8-4014-4729-9663-c31d2ac2733a.webp"
+    "fileName": "f0ad59f31fd6a280a90b736e2d1769cc.jpg"
+  },
+  {
+    "id": "human-26-4YSF4YWp4YSF4YWm",
+    "src": "/human/%E1%84%85%E1%85%A9%E1%84%85%E1%85%A6%E1%86%AB%20%E1%84%83%E1%85%B3%20%E1%84%80%E1%85%B3%E1%84%85%E1%85%A1%E1%84%91%E1%85%B3%20%E1%84%89%E1%85%A1%E1%84%8C%E1%85%B5%E1%86%AB.jpeg",
+    "answer": "human",
+    "fileName": "로렌 드 그라프 사진.jpeg"
   }
 ] as QuizImage[];
